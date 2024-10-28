@@ -1,0 +1,14 @@
+CRITICAL - 2024-09-30 23:15:06 --> ParseError: Unclosed '{' on line 14
+[Method: GET, Route: usuarios]
+in APPPATH\Views\users\list.php on line 22.
+ 1 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('users/list', [], true)
+ 3 APPPATH\Controllers\UsersController.php(22): view('users/list', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\UsersController->list()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\UsersController))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+INFO - 2024-09-30 23:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-30 23:45:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
