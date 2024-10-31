@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\ProyectoModel;
 
 class ProyectosController extends BaseController
 {
@@ -22,6 +23,16 @@ class ProyectosController extends BaseController
 
 
 
+    public function mostrarDetalle()
+    { //project_id pasar por parametro
+
+        #Obtengo los datos usando el model
+        $model = new ProyectoModel();
+        $data['proyectos'] = $model->find(1);
+
+        return $this->layout('view_detalle_proyecto.php', $data);
+    }
+
 
     public function delete($id) ##no se si anda
     {
@@ -29,5 +40,6 @@ class ProyectosController extends BaseController
         $proyectoModel = new \App\Models\ProyectoModel();
         $proyecto = $proyectoModel->save($id);
         return redirect()->to(base_url(''));
+
     }
 }
