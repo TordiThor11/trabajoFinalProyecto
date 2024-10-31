@@ -17,6 +17,9 @@ $routes->get('/crear_proyecto', 'ProyectosController::index');
 
 $routes->post('/proyectos/save', 'ProyectosController::save');
 
+//Olivetti
+$routes->get('/detalleProyecto', 'ProyectosController::mostrarDetalle');
+
 $routes->get('/login', 'LoginController::login');
 
  
