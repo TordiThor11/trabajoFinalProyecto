@@ -22,6 +22,16 @@ class ProyectosController extends BaseController
 
 
 
+    public function mostrarDetalle()
+    { //project_id pasar por parametro
+
+        #Obtengo los datos usando el model
+        $model = new ProyectoModel();
+        $data['proyectos'] = $model->find(1);
+
+        return $this->layout('view_detalle_proyecto.php', $data);
+    }
+
 
     public function delete($id) ##no se si anda
     {
