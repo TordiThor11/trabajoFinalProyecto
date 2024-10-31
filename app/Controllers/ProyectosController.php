@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\ProyectoModel;
 
 class ProyectosController extends BaseController
 {
@@ -21,8 +22,6 @@ class ProyectosController extends BaseController
     }
 
 
-
-
     public function delete($id)
     {
 
@@ -34,18 +33,14 @@ class ProyectosController extends BaseController
     }
 
 
-    public function list()
-    {
+    public function mostrarDetalle()
+    { //project_id pasar por parametro
 
-        $userModel = new UserModel();
-        $usuarios = $userModel->findAll();
+        #Obtengo los datos usando el model
+        $model = new ProyectoModel();
+        $data['proyectos'] = $model->find(1);
 
-        $data = [
-            'titulo' => 'Mi lista de usuarios',
-            'titulo2' => 'Esta es la lista de usuarios',
-            'usuarios' => $usuarios
-        ];
-
-        return $this->layout('users/list', $data);
+        
+        return $this->layout('view_detalle_proyecto.php', $data);
     }
 }

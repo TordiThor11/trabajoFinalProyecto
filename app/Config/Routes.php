@@ -15,3 +15,7 @@ $routes->get('/usuarios', 'UsersController::list');
 
 $routes->get('/crear_proyecto', 'ProyectosController::index');
 $routes->post('/proyectos/save', 'ProyectosController::save');
+
+//Olivetti
+$routes->get('/detalleProyecto', 'ProyectosController::mostrarDetalle');
+
