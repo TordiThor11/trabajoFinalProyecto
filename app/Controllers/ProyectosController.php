@@ -17,35 +17,17 @@ class ProyectosController extends BaseController
         $data = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'activo', 'objetivo', 'presupuesto_requerido', 'id_usuario_creador']);
         $proyectoModel = new \App\Models\ProyectoModel();
         $proyecto = $proyectoModel->save($data);
-        return redirect()->to(base_url('/'));
+        return redirect()->to(base_url('Home::index'));
     }
 
 
 
 
-    public function delete($id)
+    public function delete($id) ##no se si anda
     {
-
-        $userModel = new UserModel();
-
-        $user = $userModel->delete($id);
-
-        return redirect()->to(base_url('usuarios'));
-    }
-
-
-    public function list()
-    {
-
-        $userModel = new UserModel();
-        $usuarios = $userModel->findAll();
-
-        $data = [
-            'titulo' => 'Mi lista de usuarios',
-            'titulo2' => 'Esta es la lista de usuarios',
-            'usuarios' => $usuarios
-        ];
-
-        return $this->layout('users/list', $data);
+        ##no se si anda
+        $proyectoModel = new \App\Models\ProyectoModel();
+        $proyecto = $proyectoModel->save($id);
+        return redirect()->to(base_url(''));
     }
 }
