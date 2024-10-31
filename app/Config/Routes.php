@@ -14,4 +14,11 @@ $routes->get('/', 'Home::index');
 $routes->get('/usuarios', 'UsersController::list');
 
 $routes->get('/crear_proyecto', 'ProyectosController::index');
+
 $routes->post('/proyectos/save', 'ProyectosController::save');
+
+$routes->get('/login', 'LoginController::login');
+
+ 
+$routes->post('/login', 'LoginController::login');
+$routes->get('/logout', 'LoginController::logout');
