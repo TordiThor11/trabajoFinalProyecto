@@ -11,6 +11,6 @@ class Home extends BaseController
         #Obtengo los datos usando el model
         $model = new ProyectoModel();
         $data['proyectos'] = $model->findAll();
-        return view('home', $data);
+        return view('Home.php', $data);
     }
 }
