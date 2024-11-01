@@ -58,4 +58,11 @@ abstract class BaseController extends Controller
         $this->session = \Config\Services::session();
         $this->db = db_connect();
     }
+
+    public function layout($page, $data){
+        return view('templates/header').
+        view($page, $data).
+        view('templates/footer');
+    }
+
 }
