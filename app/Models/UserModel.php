@@ -6,11 +6,19 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-
-    protected $table = 'actor';
-    protected $primaryKey = 'actor_id';
-
-    protected $returnType = UserModel::class; #'array'/ 'object' / 'App/Models/UserModel';
-
-
+    protected $table = 'usuarios';
+    protected $primaryKey = 'id_usuario';
+    protected $allowedFields = ['mail', 'nombre', 'apeliido', 'contrasenia', 'tipo_usuario'];
+    
+    public function verificarUsuario($mail, $contrasenia)
+    {
+        $usuario = $this->where('mail', $mail)
+                       ->first();
+        
+        if ($usuario && $usuario['contrasenia'] === $contrasenia) {
+            return $usuario;
+        }
+        
+        return false;
+    }
 }
