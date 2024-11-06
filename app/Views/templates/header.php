@@ -76,13 +76,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
+                        <a class="nav-link" href="<?= base_url() ?>">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Proyectos</a>
+                        <a class="nav-link" href="#">Mis Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Explorar</a>
+                        <a class="nav-link" href="#">Crear Proyecto</a>
                     </li>
                 </ul>
                 <div class="d-flex">
