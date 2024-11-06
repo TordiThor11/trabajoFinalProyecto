@@ -22,8 +22,11 @@ $routes->get('proyectos/save', 'ProyectosController::save'); #solo de prueba, se
 $routes->get('/detalleProyecto/(:num)', 'ProyectosController::mostrarDetalle/$1');
 
 
-$routes->get('/login', 'LoginController::login');
+$routes->get('login', 'LoginController::login');
 
 
-$routes->post('/login', 'LoginController::login');
-$routes->get('/logout', 'LoginController::logout');
+$routes->post('login', 'LoginController::login');
+$routes->get('logout', 'LoginController::logout');
+
+$routes->get('registrar', 'RegistrarController::index');
+$routes->post('registrar/guardar', 'RegistrarController::guardar');

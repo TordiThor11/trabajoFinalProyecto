@@ -8,7 +8,7 @@ class UserModel extends Model
 {
     protected $table = 'usuarios';
     protected $primaryKey = 'id_usuario';
-    protected $allowedFields = ['mail', 'nombre', 'apeliido', 'contrasenia', 'tipo_usuario'];
+    protected $allowedFields = ['mail', 'nombre', 'apellido', 'contrasenia', 'tipo_usuario'];
     
     public function verificarUsuario($mail, $contrasenia)
     {
@@ -20,5 +20,11 @@ class UserModel extends Model
         }
         
         return false;
+    }
+
+    public function registrarUsuario($data)
+    {
+        // Guarda el usuario en la base de datos
+        return $this->insert($data);
     }
 }
