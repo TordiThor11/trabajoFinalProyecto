@@ -4,7 +4,7 @@
         <div class="row">
             <!-- Carrusel de imágenes -->
             <div class="col-md-8">
-                <h1><?= $proyecto['nombre'] ?></h1>
+                <h1><?= $proyecto->nombre ?></h1>
                 <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -60,7 +60,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Presupuesto Requerido</h5>
                                         <div class="project-description">
-                                            <?= $proyecto['presupuesto_requerido'] ?>
+                                            <?= $proyecto->presupuesto_requerido ?>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Fecha Limite</h5>
                                         <div class="project-description">
-                                            <?= $proyecto['fecha_limite'] ?>
+                                            <?= $proyecto->fecha_limite ?>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Monto Recaudado</h5>
                                         <div class="project-description">
-                                            <?=  $recaudado ?>
+                                            <?=  $proyecto->montoTotal ?>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Detalle</h3>
                         <div class="project-description">
-                            <?= $proyecto['detalle'] ?>
+                            <?= $proyecto->detalle ?>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Plan Recompensas</h3>
                         <div class="project-description">
-                            <?= $proyecto['plan_recompensas'] ?>
+                            <?= $proyecto->plan_recompensas ?>
                         </div>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Objetivo</h3>
                         <div class="project-description">
-                            <?= $proyecto['objetivo'] ?>
+                            <?= $proyecto->objetivo ?>
                         </div>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Impacto Esperado</h3>
                         <div class="project-description">
-                            <?= $proyecto['impacto_esperado'] ?>
+                            <?= $proyecto->impacto_esperado?>
                         </div>
                     </div>
                 </div>

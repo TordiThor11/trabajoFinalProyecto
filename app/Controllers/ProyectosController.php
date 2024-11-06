@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProyectoModel;
+use CodeIgniter\Database\Database;
 
 class ProyectosController extends BaseController
 {
@@ -24,12 +25,19 @@ class ProyectosController extends BaseController
 
     public function mostrarDetalle($id)
     { //project_id pasar por parametro
-
+        
+        $db = db_connect();
         #Obtengo los datos usando el model
         $model = new ProyectoModel();
-        $data['proyecto'] = $model->find($id);
+        $proyecto = $model->find($id);
 
-        return $this->layout('view_detalle_proyecto.php', $data);
+        $sql = 'SELECT SUM(p.monto) as monto FROM usuario_patrocina_proyecto p WHERE p.id_proyecto = ?  GROUP BY p.id_proyecto';
+        $query = $db->query($sql, $id);
+       
+        $proyecto->montoTotal = $query->getRow()->monto;
+       
+        $data = array('proyecto' => $proyecto);
+        return $this->layout('view_detalle_proyecto', $data);
     }
 
 

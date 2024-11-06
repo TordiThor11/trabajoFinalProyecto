@@ -6,11 +6,11 @@
                 <div class="col-md-4">
 
                     <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="<?= $proyecto['nombre']; ?>">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="<?= $proyecto->nombre; ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $proyecto['nombre']; ?></h5>
-                            <p class="card-text"><?= $proyecto['fecha_limite']; ?></p>
-                            <a href="http://localhost/ProyectoFinal/public/detalleProyecto/<?= $proyecto['id_proyecto']; ?>" 
+                            <h5 class="card-title"><?= $proyecto->nombre; ?></h5>
+                            <p class="card-text"><?= $proyecto->fecha_limite; ?></p>
+                            <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" 
                             class="btn btn-primary">Ver más</a>
                         </div> 
                     </div>
