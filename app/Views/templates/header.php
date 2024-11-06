@@ -79,10 +79,10 @@
                         <a class="nav-link" href="<?= base_url() ?>">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mis Proyectos</a>
+                        <a class="nav-link" href="<?= base_url("misProyectos") ?>">Mis Proyectos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Crear Proyecto</a>
+                        <a class="nav-link" href="<?= base_url("crear_proyecto") ?>">Crear Proyecto</a>
                     </li>
                 </ul>
                 <div class="d-flex">

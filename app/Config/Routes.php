@@ -30,3 +30,6 @@ $routes->get('logout', 'LoginController::logout');
 
 $routes->get('registrar', 'RegistrarController::index');
 $routes->post('registrar/guardar', 'RegistrarController::guardar');
+
+$routes->get('misProyectos', 'ProyectosController::misProyectos');
+

@@ -48,4 +48,10 @@ class ProyectosController extends BaseController
         $proyecto = $proyectoModel->save($id);
         return redirect()->to(base_url(''));
     }
+    
+    public function misProyectos()
+    {
+        $data = array();
+        return $this->layout('view_misProyectos', $data);
+    }
 }
