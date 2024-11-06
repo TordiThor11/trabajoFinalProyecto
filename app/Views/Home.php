@@ -10,8 +10,9 @@
                         <div class="card-body">
                             <h5 class="card-title"><?= $proyecto['nombre']; ?></h5>
                             <p class="card-text"><?= $proyecto['fecha_limite']; ?></p>
-                            <a href="http://localhost/ProyectoFinal/public/detalleProyecto" class="btn btn-primary">Ver más</a>
-                        </div>
+                            <a href="http://localhost/ProyectoFinal/public/detalleProyecto/<?= $proyecto['id_proyecto']; ?>" 
+                            class="btn btn-primary">Ver más</a>
+                        </div> 
                     </div>
 
                 </div>

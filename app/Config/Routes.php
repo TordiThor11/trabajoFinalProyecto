@@ -18,7 +18,9 @@ $routes->get('/crear_proyecto', 'ProyectosController::index');
 $routes->post('/proyectos/save', 'ProyectosController::save');
 $routes->get('proyectos/save', 'ProyectosController::save'); #solo de prueba, se tiene que borrar
 
-$routes->get('/detalleProyecto', 'ProyectosController::mostrarDetalle');
+
+$routes->get('/detalleProyecto/(:num)', 'ProyectosController::mostrarDetalle/$1');
+
 
 $routes->get('/login', 'LoginController::login');
 
