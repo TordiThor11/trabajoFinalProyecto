@@ -58,9 +58,4 @@ class LoginController extends Controller
         return view('view_login');
     }
 
-    public function logout()
-    {
-        session()->destroy();
-        return redirect()->to('/view_login');
-    }
 }
