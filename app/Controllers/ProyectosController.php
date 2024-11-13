@@ -64,4 +64,17 @@ class ProyectosController extends BaseController
         $data = array();    //Esto crea un array vacio. Es lo mismo que: "$data = [];"
         return $this->layout('view_misProyectos', $data);
     }
+
+    public function patrocinar()
+    {
+        // $data = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', '1', 'objetivo', 'presupuesto_requerido', 'id_usuario_creador']);
+        // $proyectoModel = new ProyectoModel();
+        // $proyecto = $proyectoModel->save($data);
+        return redirect()->to(base_url('/'));
+    }
+    public function ventanaDePago()
+    {
+        $data = []; //Creo un array vacio para completar el parametro $data
+        return $this->layout('view_patrocinar_proyecto', $data);
+    }
 }

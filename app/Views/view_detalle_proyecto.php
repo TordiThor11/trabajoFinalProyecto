@@ -48,7 +48,8 @@
                                 <i class="bi bi-heart"></i>
                                 Favorito
                             </button>
-                            <button class="btn btn-primary" onclick="alert('Funcionalidad en desarrollo')">
+                            <button class="btn btn-primary" onclick="window.location.href='<?= base_url('proyectos/ventanaDePago') #falta pasar el id del proyecto 
+                                                                                            ?>'">
                                 <i class="bi bi-star"></i>
                                 Patrocinar
                             </button>
@@ -76,7 +77,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Monto Recaudado</h5>
                                         <div class="project-description">
-                                            <?=  $proyecto->montoTotal ?>
+                                            <?= $proyecto->montoTotal ?>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +120,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Impacto Esperado</h3>
                         <div class="project-description">
-                            <?= $proyecto->impacto_esperado?>
+                            <?= $proyecto->impacto_esperado ?>
                         </div>
                     </div>
                 </div>
@@ -130,7 +131,7 @@
 
 <!-- JavaScript para el carrusel -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         // Inicializar carrusel
         const carousel = new bootstrap.Carousel(document.querySelector('#projectCarousel'), {
             interval: 5000,

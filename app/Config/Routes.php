@@ -33,3 +33,7 @@ $routes->post('registrar/guardar', 'RegistrarController::guardar');
 
 $routes->get('misProyectos', 'ProyectosController::misProyectos');
 
+$routes->get('proyectos/patrocinar', 'ProyectosController::patrocinar'); #get es de prueba, deberia de ser borrado
+$routes->post('proyectos/patrocinar', 'ProyectosController::patrocinar');
+
+$routes->get('proyectos/ventanaDePago', 'ProyectosController::ventanaDePago');
