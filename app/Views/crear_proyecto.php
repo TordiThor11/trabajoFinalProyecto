@@ -10,26 +10,6 @@
 
 <body>
 
-    <!-- Navbar (opcional, reutilizado de la vista principal) -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Crowdfunding</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Proyectos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
     <!-- Formulario de Creación de Proyecto -->
     <div class="container mt-5">
@@ -58,14 +38,6 @@
             <div class="form-group">
                 <label for="impacto_esperado">Impacto Esperado</label>
                 <textarea class="form-control" id="impacto_esperado" name="impacto_esperado" rows="3" placeholder="Descripción del impacto esperado" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="activo">Activo</label>
-                <select class="form-control" id="activo" name="activo" required>
-                    <option value="1">Sí</option>
-                    <option value="0">No</option>
-                </select>
             </div>
 
             <div class="form-group">
