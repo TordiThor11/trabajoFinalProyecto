@@ -1,5 +1,5 @@
   <!-- Project Cards Section -->
-    <div class="container mt-5">
+  <div class="container mt-5">
         <div class="row">
             <!-- Ejemplo de carta de proyecto -->
             <?php foreach ($proyectos as $proyecto): ?>

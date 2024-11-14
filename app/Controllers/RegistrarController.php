@@ -41,12 +41,19 @@ class RegistrarController extends Controller
             'tipo_usuario' => '0' // Ajusta según el valor predeterminado deseado
         ];
 
-         
-
         // Guarda en la base de datos
         if ($usuarioModel->insert($data)) {
-            // Redirige a la vista de inicio de sesión con un mensaje de éxito
-            return redirect()->to('/login')->with('success', 'Registro exitoso. Ahora puedes iniciar sesión.');
+            // Iniciar sesión automáticamente después del registro
+            $session = session();
+            $session->set([
+                'id_usuario' => $usuarioModel->insertID(), // Obtener el ID del usuario insertado
+                'mail' => $data['mail'],
+                'tipo_usuario' => $data['tipo_usuario'],
+                'isLoggedIn' => true
+            ]);
+
+            // Redirigir al home
+            return redirect()->to('/home');
         } else {
             // Redirige con un mensaje de error si la inserción falla
             return redirect()->back()->with('error', 'Error al registrar el usuario.');

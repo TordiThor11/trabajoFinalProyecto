@@ -2,16 +2,26 @@
 
 namespace App\Controllers;
 
-use App\Models\ProyectoModel;   #Marco que voy a utilizar el modelo ProyectoModel
+use CodeIgniter\Controller;
+use App\Models\ProyectoModel;
 
 class Home extends BaseController
 {
     public function index(): string
     {
-        #Obtengo los datos usando el model
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/login');
+        }
+
+        // Obtener datos del modelo de proyectos
         $model = new ProyectoModel();
         $data['proyectos'] = $model->findAll();
 
-        return $this->layout('Home.php', $data);
+        return $this->layout('view_home.php', $data);
     }
+
+    
+
+    
 }
