@@ -12,8 +12,7 @@ class UserModel extends Model
     
     public function verificarUsuario($mail, $contrasenia)
     {
-        $usuario = $this->where('mail', $mail)
-                       ->first();
+        $usuario = $this->where('mail', $mail)->first();
         
         if ($usuario && $usuario['contrasenia'] === $contrasenia) {
             return $usuario;

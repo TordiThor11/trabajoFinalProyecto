@@ -16,6 +16,24 @@
             background-color: #E0D8F0;
             font-family: Arial, sans-serif;
         }
+        header {
+            width: 100%;
+            background-color: #6C5CE7;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        footer {
+            width: 100%;
+            background-color: #FFFFFF;
+            color: #6C5CE7;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 2rem; /* Espacio entre el formulario y el footer */
+        }
         .container {
             width: 90%;
             max-width: 400px;
@@ -24,6 +42,7 @@
             padding: 2rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+            margin-top: 2rem;
         }
         .container h3 {
             color: #6C5CE7;
@@ -82,6 +101,10 @@
 </head>
 <body>
 
+<header>
+    Bienvenido a la Plataforma de Registro
+</header>
+
 <div class="container">
     <h3>Registrarse</h3>
     <form action="<?= base_url('registrar/guardar') ?>" method="post">
@@ -111,6 +134,10 @@
         <?= session('validation')->listErrors() ?>
     </div>
 <?php endif; ?>
+
+<footer>
+    © 2024 Tu Empresa. Todos los derechos reservados.
+</footer>
 
 </body>
 </html>

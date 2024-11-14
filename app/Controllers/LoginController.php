@@ -7,55 +7,42 @@ use CodeIgniter\Controller;
 
 class LoginController extends Controller
 {
-    protected $usuarioModel;
-
-    public function __construct()
+    public function index()
     {
-        // Inicializa el modelo `UserModel`
-        $this->usuarioModel = new UserModel();
+        // Carga la vista de login
+        return view('view_login');
     }
 
     public function login()
     {
-        if ($this->request->getMethod() === 'post') {
-            $rules = [
-                'mail' => 'required|valid_email',
-                'contrasenia' => 'required|min_length[5]'
-            ];
+        $session = session();
+        $userModel = new UserModel();
 
-            if (!$this->validate($rules)) {
-                return view('view_login', [
-                    'validation' => $this->validator
-                ]);
-            }
+        $mail = $this->request->getVar('mail');
+        $contrasenia = $this->request->getVar('contrasenia');
 
-            $mail = $this->request->getPost('mail');
-            $contrasenia = $this->request->getPost('contrasenia');
-            $usuario = $this->usuarioModel->verificarUsuario($mail, $contrasenia);
+        $usuario = $userModel->verificarUsuario($mail, $contrasenia);
 
-            if ($usuario) {
-                $sessionData = [
-                    'id_usuario' => $usuario['id_usuario'],
-                    'nombre' => $usuario['nombre'],
-                    'apellido' => $usuario['apellido'],
-                    'mail' => $usuario['mail'],
-                    'tipo_usuario' => $usuario['tipo_usuario'],
-                    'logged_in' => true
-                ];
-                session()->set($sessionData);
+        if ($usuario) {
+            $session->set([
+                'id_usuario' => $usuario['id_usuario'],
+                'mail' => $usuario['mail'],
+                'tipo_usuario' => $usuario['tipo_usuario'],
+                'isLoggedIn' => true
+            ]);
 
-                if ($usuario['tipo_usuario'] === 1) {
-                    return redirect()->to('dashboard/admin');
-                } else {
-                    return redirect()->to('dashboard/usuario');
-                }
-            }
-
-            session()->setFlashdata('error', 'Email o contraseña incorrectos');
-            return redirect()->back();
+            // Redirigir al home después de un inicio de sesión exitoso
+            return redirect()->to('/');
+        } else {
+            $session->setFlashdata('error', 'Correo electrónico o contraseña incorrectos.');
+            return redirect()->to('/login');
         }
-
-        return view('view_login');
     }
 
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/login');
+    }
 }
