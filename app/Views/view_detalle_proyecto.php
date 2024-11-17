@@ -48,8 +48,9 @@
                                 <i class="bi bi-heart"></i>
                                 Favorito
                             </button>
-                            <button class="btn btn-primary" onclick="window.location.href='<?= base_url('proyectos/ventanaDePago') #falta pasar el id del proyecto 
-                                                                                            ?>'">
+
+
+                            <button class="btn btn-primary" onclick="window.location.href='<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>'">
                                 <i class="bi bi-star"></i>
                                 Patrocinar
                             </button>

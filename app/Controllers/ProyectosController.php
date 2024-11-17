@@ -65,16 +65,27 @@ class ProyectosController extends BaseController
         return $this->layout('view_misProyectos', $data);
     }
 
-    public function patrocinar()
+    public function patrocinar($idProyecto)
     {
-        // $data = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', '1', 'objetivo', 'presupuesto_requerido', 'id_usuario_creador']);
-        // $proyectoModel = new ProyectoModel();
-        // $proyecto = $proyectoModel->save($data);
-        return redirect()->to(base_url('/'));
+        //Creo la session para obtener el id del usuario
+        $session = session();
+        $idUsuario = $session->get('id_usuario');
+        if (!$idUsuario) {
+            dd("No hay usuario logueado, esto deberia ser tratado con un filter");
+        }
+
+        //Guardo los el monto enviado desde el formulario en una variable
+        $montoInversion = $this->request->getPost(['montoInversion']);    //Tambien se pueden pedir los demas datos del formulario de pago, no lo considero necesario
+
+        //Guardo los datos en la db
+        $db = db_connect(); // $proyectoModel = new ProyectoModel();
+        $sql = "INSERT INTO usuario_patrocina_proyecto (id_usuario, id_proyecto, fecha, monto) VALUES (?, ?, ?, ?)";
+        $db->query($sql, [$idUsuario, $idProyecto, date('Y-m-d H:i:s'), $montoInversion]);
+        return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
     }
-    public function ventanaDePago()
+    public function ventanaDePago($idProyecto)
     {
-        $data = []; //Creo un array vacio para completar el parametro $data
+        $data = array('id_proyecto' => $idProyecto);; //recibo el id pasado via get/parametros y lo envio al formulario de pago
         return $this->layout('view_patrocinar_proyecto', $data);
     }
 }

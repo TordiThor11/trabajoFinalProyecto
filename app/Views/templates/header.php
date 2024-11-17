@@ -1,70 +1,72 @@
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Proyecto</title>
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
-    
+
     <style>
-    /* Estilos para el header */
-    .navbar-custom {
-        background-color: #6c5ce7;
-        padding: 1rem;
-    }
-    
-    .navbar-custom .navbar-brand,
-    .navbar-custom .nav-link {
-        color: white;
-    }
-    
-    .navbar-custom .nav-link:hover {
-        color: rgba(255,255,255,0.8);
-    }
+        /* Estilos para el header */
+        .navbar-custom {
+            background-color: #6c5ce7;
+            padding: 1rem;
+        }
 
-    /* Estilos para el contenido principal */
-    .carousel-item img {
-        max-height: 600px;
-        object-fit: contain;
-        background-color: #f8f9fa;
-    }
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: white;
+        }
 
-    .project-description {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #333;
-    }
+        .navbar-custom .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
 
-    .btn:hover {
-        transform: scale(1.05);
-        transition: transform 0.2s;
-    }
+        /* Estilos para el contenido principal */
+        .carousel-item img {
+            max-height: 600px;
+            object-fit: contain;
+            background-color: #f8f9fa;
+        }
 
-    .btn-primary {
-        background-color: #6c5ce7;
-        border-color: #6c5ce7;
-    }
+        .project-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+        }
 
-    .btn-primary:hover {
-        background-color: #5b4bc4;
-        border-color: #5b4bc4;
-    }
+        .btn:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
 
-    /* Estilos para el footer */
-    .footer {
-        background-color: #f8f9fa;
-        padding: 2rem 0;
-        margin-top: 3rem;
-    }
+        .btn-primary {
+            background-color: #6c5ce7;
+            border-color: #6c5ce7;
+        }
 
-    .main-content {
-        min-height: calc(100vh - 300px);
-    }
+        .btn-primary:hover {
+            background-color: #5b4bc4;
+            border-color: #5b4bc4;
+        }
+
+        /* Estilos para el footer */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .main-content {
+            min-height: calc(100vh - 300px);
+        }
     </style>
 </head>
+
 <body>
     <!-- Header/Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
@@ -87,7 +89,21 @@
                 </ul>
                 <div class="d-flex">
                     <a class="nav-link" href="#">
-                        <i class="bi bi-person-circle"></i> Mi Perfil
+                        <i class="bi bi-person-circle"></i>
+
+                        <?php
+                        #Esto creo que deberia tratarse con un filter mejor#Esto creo que deberia tratarse con un filter mejor#Esto creo que deberia tratarse con un filter mejor
+                        if (session()->get('isLoggedIn')) {
+                            #si esta logueado
+                            echo session()->get('mail');
+                        } else {
+                            #si NO esta logueado
+                            #Esto creo que deberia tratarse con un filter mejor #Esto creo que deberia tratarse con un filter mejor #Esto creo que deberia tratarse con un filter mejor
+
+                            echo 'Iniciar sesion';
+                        }
+
+                        ?>
                     </a>
                 </div>
             </div>

@@ -33,7 +33,7 @@ $routes->post('registrar/guardar', 'RegistrarController::guardar');
 
 $routes->get('misProyectos', 'ProyectosController::misProyectos');
 
-$routes->get('proyectos/patrocinar', 'ProyectosController::patrocinar'); #get es de prueba, deberia de ser borrado
-$routes->post('proyectos/patrocinar', 'ProyectosController::patrocinar');
+$routes->get('proyectos/patrocinar', 'ProyectosController::patrocinar'); #Uno de los dos deberia de ser borrado
+$routes->post('proyectos/patrocinar/(:num)', 'ProyectosController::patrocinar/$1'); #Uno de los dos deberia de ser borrado
 
-$routes->get('proyectos/ventanaDePago', 'ProyectosController::ventanaDePago');
+$routes->get('proyectos/ventanaDePago/(:num)', 'ProyectosController::ventanaDePago/$1');

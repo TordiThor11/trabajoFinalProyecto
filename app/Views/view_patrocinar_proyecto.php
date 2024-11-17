@@ -14,11 +14,12 @@
         <div class="card mx-auto" style="max-width: 500px;">
             <div class="card-body">
                 <h5 class="card-title">Detalles de Pago</h5>
-                <form action="<?= base_url('proyectos/patrocinar') ?>" method="POST">
+
+                <form action="<?= base_url('proyectos/patrocinar/' . $id_proyecto) ?>" method="POST">
                     <!-- Monto de Donación -->
                     <div class="mb-3">
-                        <label for="donationAmount" class="form-label">Monto de Donación</label>
-                        <input type="number" class="form-control" id="donationAmount" name="donationAmount" placeholder="Ej: 5000" required>
+                        <label for="montoInversion" class="form-label">Monto de Inversión</label>
+                        <input type="number" class="form-control" id="montoInversion" name="montoInversion" placeholder="Ej: 5000" required>
                     </div>
 
                     <!-- Nombre en la Tarjeta -->
