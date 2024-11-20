@@ -193,6 +193,9 @@
                         <a class="nav-link" href="<?= base_url("misProyectos") ?>">Mis Proyectos</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url("misPatrocinios") ?>">Mis Patrociños</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<?= base_url("crear_proyecto") ?>">Crear Proyecto</a>
                     </li>
                 </ul>
