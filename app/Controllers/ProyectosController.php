@@ -61,8 +61,36 @@ class ProyectosController extends BaseController
 
     public function misProyectos()
     {
-        $data = array();    //Esto crea un array vacio. Es lo mismo que: "$data = [];"
+        $proyectos = new ProyectoModel();
+        $db = db_connect();
+        $session = session(); 
+        $id_usuario = $session->get('id_usuario');
+        
+        $sql = 'SELECT * FROM `proyectos` p WHERE p.id_usuario_creador = 1;';
+        $query = $db->query($sql, $id_usuario);
+
+        
+        $proyectos = $query->getResult();
+        $data = array('proyectos' => $proyectos);
+
         return $this->layout('view_misProyectos', $data);
+    }
+
+    public function misPatrocinios()
+    {
+        $proyectos = new ProyectoModel();
+        $db = db_connect();
+        $session = session(); 
+        $id_usuario = $session->get('id_usuario');
+        
+        $sql = 'SELECT p.*, u.monto FROM `usuario_patrocina_proyecto` u JOIN `proyectos` p ON p.id_proyecto = u.id_proyecto WHERE u.id_usuario = ?;';
+        $query = $db->query($sql, $id_usuario);
+
+        
+        $proyectos = $query->getResult();
+        $data = array('proyectos' => $proyectos);
+
+        return $this->layout('view_misPatrocinios', $data);
     }
 
     public function patrocinar($idProyecto)
@@ -83,6 +111,7 @@ class ProyectosController extends BaseController
         $db->query($sql, [$idUsuario, $idProyecto, date('Y-m-d H:i:s'), $montoInversion]);
         return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
     }
+
     public function ventanaDePago($idProyecto)
     {
         $data = array('id_proyecto' => $idProyecto);; //recibo el id pasado via get/parametros y lo envio al formulario de pago

@@ -53,7 +53,7 @@ class RegistrarController extends Controller
             ]);
 
             // Redirigir al home
-            return redirect()->to('/home');
+            return redirect()->to('/');
         } else {
             // Redirige con un mensaje de error si la inserción falla
             return redirect()->back()->with('error', 'Error al registrar el usuario.');
