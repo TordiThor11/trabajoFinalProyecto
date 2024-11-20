@@ -175,14 +175,17 @@
     </style>
 </head>
 
+
 <body>
     <!-- Header/Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Logo</a>
             <?php if (session()->get('isLoggedIn')): ?>
+            
+            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
@@ -212,6 +215,8 @@
                     </div>
                 </div>
             </div>
+            
+            
             <?php else: ?>
             <div class="ms-auto">
                 <div class="nav-item">

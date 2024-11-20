@@ -1,30 +1,15 @@
-<!-- application/views/items_view.php -->
-<!DOCTYPE html>
-<html>
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .item {
-            padding: 10px;
-            margin: 5px 0;
-            background: #f8f9fa;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-3">
-       
-    <?php foreach ($proyectos as $proyecto): ?>
-        <div class="item d-flex justify-content-between align-items-center">
-            <div><?=$proyecto->nombre?></div>
-            <div>
-            <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" 
-            class="btn btn-primary">Ver Proyecto</a>
-            </div>
-        </div>
+<div class="container mt-3">
+    <ul class="list-group">
+        <?php foreach ($proyectos as $proyecto): ?>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div><?=$proyecto->nombre?></div>
+                <div>
+                    <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" class="btn btn-primary">Ver Proyecto</a>
+                </div>
+            </li>
         <?php endforeach; ?>
-    </div>
+    </ul>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+   
