@@ -12,7 +12,8 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\PageCache;
 use CodeIgniter\Filters\PerformanceMetrics;
 use CodeIgniter\Filters\SecureHeaders;
-
+use App\Filters\AutenticacionFilter; //Este es el filtro creado para verficar si el usuario esta logeado
+use App\Filters\AdminFilter; //Este es el filtro creado para verficar si el usuario es admin
 class Filters extends BaseFilters
 {
     /**
@@ -34,6 +35,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'autenticacion' => AutenticacionFilter::class, // Alias del filtro creado para autenticar loggeo del usuario
+        'isAdmin' => AdminFilter::class, // Alias del filtro creado para verificar si el usuario es admin
     ];
 
     /**

@@ -25,7 +25,7 @@ $routes->get('/detalleProyecto/(:num)', 'ProyectosController::mostrarDetalle/$1'
 
 $routes->get('login', 'LoginController::index');
 
-$routes->post('login', 'LoginController::login');
+$routes->post('login', 'LoginController::login', ['filter' => 'isAdmin']);
 $routes->get('logout', 'LoginController::logout');
 
 $routes->get('registrar', 'RegistrarController::index');
@@ -36,4 +36,4 @@ $routes->get('misProyectos', 'ProyectosController::misProyectos');
 $routes->get('proyectos/patrocinar', 'ProyectosController::patrocinar'); #Uno de los dos deberia de ser borrado
 $routes->post('proyectos/patrocinar/(:num)', 'ProyectosController::patrocinar/$1'); #Uno de los dos deberia de ser borrado
 
-$routes->get('proyectos/ventanaDePago/(:num)', 'ProyectosController::ventanaDePago/$1');
+$routes->get('proyectos/ventanaDePago/(:num)', 'ProyectosController::ventanaDePago/$1', ['filter' => 'autenticacion']);
