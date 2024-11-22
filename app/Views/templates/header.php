@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Proyecto</title>
+    <title>Impulsa</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                             <span class="text-light fw-bold"><?= session()->get('mail'); ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item text-dark" href="#">
+                            <li><a class="dropdown-item text-dark" href="<?= base_url('configuracion_perfil') ?>">
                                 <i class="bi bi-gear me-2"></i>
                                 Configurar Perfil
                             </a></li>
