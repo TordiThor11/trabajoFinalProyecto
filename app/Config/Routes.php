@@ -9,7 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 #En el routeo el primer parametro es el origen y el segundo el destino
 #El destino creo se especifica como 'controlador a usar'::'metodo a llamar dentro del controlador'
 
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index',['filter' => 'isAdmin'] );
 
 $routes->get('/usuarios', 'UsersController::list');
 
@@ -38,3 +38,5 @@ $routes->get('misPatrocinios', 'ProyectosController::misPatrocinios', ['filter' 
 $routes->post('proyectos/patrocinar/(:num)', 'ProyectosController::patrocinar/$1'); #Uno de los dos deberia de ser borrado
 
 $routes->get('proyectos/ventanaDePago/(:num)', 'ProyectosController::ventanaDePago/$1', ['filter' => 'autenticacion']);
+$routes->get('/configuracion_perfil', 'ConfiguracionPerfilController::index'); 
+$routes->post('/configuracion_perfil/guardar', 'ConfiguracionPerfilController::guardar');
