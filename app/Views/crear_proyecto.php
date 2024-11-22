@@ -50,11 +50,6 @@
                 <input type="number" class="form-control" id="presupuesto_requerido" name="presupuesto_requerido" placeholder="Presupuesto en $USD" required>
             </div>
 
-            <div class="form-group">
-                <label for="id_usuario_creador">ID del Usuario Creador</label>
-                <input type="number" class="form-control" id="id_usuario_creador" name="id_usuario_creador" placeholder="ID del usuario creador" required>
-            </div>
-
             <button type="submit" class="btn btn-primary btn-block">Crear Proyecto</button>
         </form>
     </div>

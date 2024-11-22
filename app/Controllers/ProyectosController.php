@@ -16,7 +16,18 @@ class ProyectosController extends BaseController
 
     public function save()
     {
-        $data = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', '1', 'objetivo', 'presupuesto_requerido', 'id_usuario_creador']);
+        //Obtengo el id del usuario logueado
+        $session = session();
+        $id_usuario_creador = $session->get('id_usuario');
+        $data = ['id_usuario_creador' => $id_usuario_creador];
+
+        //Obtengo los datos del formulario
+        $formData = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'estado', 'objetivo', 'presupuesto_requerido']);
+
+        //Unimos los arreglos
+        $data = array_merge($data, $formData, ['activo' => 1]); //unimos los arreglos 
+
+        //Guardo los datos en la db
         $proyectoModel = new ProyectoModel();
         $proyecto = $proyectoModel->save($data);
         return redirect()->to(base_url('/'));
@@ -63,13 +74,13 @@ class ProyectosController extends BaseController
     {
         $proyectos = new ProyectoModel();
         $db = db_connect();
-        $session = session(); 
+        $session = session();
         $id_usuario = $session->get('id_usuario');
-        
+
         $sql = 'SELECT * FROM `proyectos` p WHERE p.id_usuario_creador = 1;';
         $query = $db->query($sql, $id_usuario);
 
-        
+
         $proyectos = $query->getResult();
         $data = array('proyectos' => $proyectos);
 
@@ -80,13 +91,13 @@ class ProyectosController extends BaseController
     {
         $proyectos = new ProyectoModel();
         $db = db_connect();
-        $session = session(); 
+        $session = session();
         $id_usuario = $session->get('id_usuario');
-        
+
         $sql = 'SELECT p.*, u.monto FROM `usuario_patrocina_proyecto` u JOIN `proyectos` p ON p.id_proyecto = u.id_proyecto WHERE u.id_usuario = ?;';
         $query = $db->query($sql, $id_usuario);
 
-        
+
         $proyectos = $query->getResult();
         $data = array('proyectos' => $proyectos);
 
