@@ -84,12 +84,14 @@ class ProyectosController extends BaseController
         $id_usuario = $session->get('id_usuario');
         
         $sql = 'SELECT p.*, u.monto FROM `usuario_patrocina_proyecto` u JOIN `proyectos` p ON p.id_proyecto = u.id_proyecto WHERE u.id_usuario = ?;';
-        $query = $db->query($sql, $id_usuario);
+        $query = $db->query($sql, [$id_usuario]); // Usa un array para pasar el valor del marcador de posición
+
 
         
         $proyectos = $query->getResult();
         $data = array('proyectos' => $proyectos);
 
+ 
         return $this->layout('view_misPatrocinios', $data);
     }
 

@@ -3,141 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
-    <style>
-        /* Estilos básicos para el contenedor y el formulario */
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #E0D8F0;
-            font-family: Arial, sans-serif;
-        }
-        header {
-            width: 100%;
-            background-color: #6C5CE7;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        footer {
-            width: 100%;
-            background-color: #FFFFFF;
-            color: #6C5CE7;
-            padding: 1rem;
-            text-align: center;
-            font-size: 1rem;
-            margin-top: 2rem; /* Espacio entre el formulario y el footer */
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            background-color: #FFFFFF;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            margin-top: 2rem;
-        }
-        .container h3 {
-            color: #6C5CE7;
-            margin-bottom: 1rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #6C5CE7;
-            font-size: 14px;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 0.5rem;
-            border: 1px solid #D1C4E9;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #6C5CE7;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #574B9F;
-        }
-        .back-button {
-            margin-top: 1rem;
-            background-color: #ccc;
-            color: black;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .back-button:hover {
-            background-color: #aaa;
-        }
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-    </style>
+    <title>Registro - Crowdfunding</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
-
-<header>
-    Bienvenido a la Plataforma de Registro
-</header>
-
-<div class="container">
-    <h3>Registrarse</h3>
-    <form action="<?= base_url('registrar/guardar') ?>" method="post">
-        <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url() ?>">Inicio</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a class="btn btn-outline-light" href="<?= base_url('login') ?>">
+                        <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido" required>
-        </div>
-        <div class="form-group">
-            <label for="mail">Email</label>
-            <input type="email" id="mail" name="mail" required>
-        </div>
-        <div class="form-group">
-            <label for="contrasenia">Contraseña</label>
-            <input type="password" id="contrasenia" name="contrasenia" required>
-        </div>
-        <button type="submit">Registrar</button>
-    </form>
-    <button class="back-button" onclick="window.history.back()">Volver</button>
-</div>
+    </nav>
 
-<?php if (session()->has('validation')): ?>
-    <div class="alert alert-danger">
-        <?= session('validation')->listErrors() ?>
-    </div>
-<?php endif; ?>
+    <!-- Main Content -->
+    <main class="container flex-grow-1 d-flex justify-content-center align-items-center py-5">
+        <div class="card shadow-sm rounded-3" style="max-width: 450px; width: 100%;">
+            <div class="card-body p-4">
+                <!-- User Icon -->
+                <div class="text-center mb-4">
+                    <div class="bg-primary rounded-circle d-inline-flex justify-content-center align-items-center mb-2" 
+                         style="width: 64px; height: 64px;">
+                        <i class="bi bi-person-plus-fill text-white fs-1"></i>
+                    </div>
+                    <h4 class="card-title text-primary">Crear Cuenta</h4>
+                </div>
 
-<footer>
-    © 2024 Tu Empresa. Todos los derechos reservados.
-</footer>
+                <!-- Validation Errors -->
+                <?php if (session()->has('validation')): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?= session('validation')->listErrors() ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
 
+                <!-- Registration Form -->
+                <form action="<?= base_url('registrar/guardar') ?>" method="post">
+                    <!-- Nombre Field -->
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">
+                            <i class="bi bi-person-fill text-primary me-1"></i>
+                            Nombre
+                        </label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="nombre" 
+                               name="nombre" 
+                               required
+                               autocomplete="given-name"
+                               placeholder="Ingresa tu nombre">
+                    </div>
+
+                    <!-- Apellido Field -->
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">
+                            <i class="bi bi-person-fill text-primary me-1"></i>
+                            Apellido
+                        </label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="apellido" 
+                               name="apellido" 
+                               required
+                               autocomplete="family-name"
+                               placeholder="Ingresa tu apellido">
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="mb-3">
+                        <label for="mail" class="form-label">
+                            <i class="bi bi-envelope-fill text-primary me-1"></i>
+                            Correo electrónico
+                        </label>
+                        <input type="email" 
+                               class="form-control" 
+                               id="mail" 
+                               name="mail" 
+                               required
+                               autocomplete="email"
+                               placeholder="ejemplo@correo.com">
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="mb-4">
+                        <label for="contrasenia" class="form-label">
+                            <i class="bi bi-lock-fill text-primary me-1"></i>
+                            Contraseña
+                        </label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="contrasenia" 
+                               name="contrasenia" 
+                               required
+                               autocomplete="new-password"
+                               placeholder="Crea una contraseña segura">
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <button type="submit" class="btn btn-primary w-100 mb-3">
+                        <i class="bi bi-person-plus me-1"></i>
+                        Crear cuenta
+                    </button>
+
+                    <!-- Login Link -->
+                    <div class="text-center mt-3">
+                        <span class="text-muted">¿Ya tienes una cuenta?</span>
+                        <a href="<?= base_url('login') ?>" class="text-primary text-decoration-none ms-1">
+                            Inicia sesión aquí
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3 border-top">
+        <div class="container">
+            <p class="mb-0 text-muted">&copy; <?= date('Y') ?> Crowdfunding. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
