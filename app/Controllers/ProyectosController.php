@@ -25,6 +25,26 @@ class ProyectosController extends BaseController
         //Obtengo los datos del formulario
         $formData = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'estado', 'objetivo', 'presupuesto_requerido']);
 
+
+
+
+        // Verifico si hay un archivo cargado
+        $imagen = $this->request->getFile('imagen_principal');
+        if ($imagen && $imagen->isValid() && !$imagen->hasMoved()) {
+            // Genero un nombre único para la imagen
+            $nuevoNombre = $imagen->getRandomName();
+            // Muevo la imagen al directorio público (puedes ajustarlo según tus necesidades)
+            $imagen->move(ROOTPATH . 'public/uploads/proyectos', $nuevoNombre);
+            // Guardo el nombre del archivo en los datos del proyecto
+            $formData['imagen_principal'] = $nuevoNombre;
+        } else {
+            // Manejar errores de carga de archivos
+            return redirect()->back()->with('error', 'Error al cargar la imagen.');
+        }
+
+
+
+
         //Unimos los arreglos
         $data = array_merge($data, $formData, ['activo' => 1]); //unimos los arreglos 
 

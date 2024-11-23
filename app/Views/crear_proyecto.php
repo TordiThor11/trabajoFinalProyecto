@@ -14,7 +14,7 @@
     <!-- Formulario de Creación de Proyecto -->
     <div class="container mt-5">
         <h2 class="text-center mb-4">Crear un Nuevo Proyecto</h2>
-        <form action="<?= base_url('proyectos/save') ?>" method="post">
+        <form action="<?= base_url('proyectos/save') ?>" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="nombre">Nombre del Proyecto</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del proyecto" required>
@@ -48,6 +48,11 @@
             <div class="form-group">
                 <label for="presupuesto_requerido">Presupuesto Requerido</label>
                 <input type="number" class="form-control" id="presupuesto_requerido" name="presupuesto_requerido" placeholder="Presupuesto en $USD" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen_principal">Imagen del Proyecto</label>
+                <input type="file" class="form-control-file" id="imagen_principal" name="imagen_principal" accept="image/*" required>
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Crear Proyecto</button>

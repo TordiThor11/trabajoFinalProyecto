@@ -5,10 +5,10 @@
             <!-- Carrusel de imágenes -->
             <div class="col-md-8">
                 <h1><?= $proyecto->nombre ?></h1>
-                <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" style="max-height: 800px;">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/800x600" class="d-block w-100" alt="Project Image 1">
+                            <img src="<?= base_url('uploads/proyectos/' . $proyecto->imagen_principal) ?>" class="d-block w-100 img-fluid" alt="Imagen del Proyecto" style="object-fit: cover; height: 800px;">
                         </div>
                         <div class="carousel-item">
                             <img src="https://via.placeholder.com/800x600" class="d-block w-100" alt="Project Image 2">
