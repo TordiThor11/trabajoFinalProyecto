@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProyectoModel;
+use App\Models\UsuarioPatrocinaProyectoModel;
 use CodeIgniter\Database\Database;
 
 class ProyectosController extends BaseController
@@ -88,6 +89,22 @@ class ProyectosController extends BaseController
     }
 
     public function misPatrocinios()
+    /*{
+        $proyectos = new ProyectoModel();
+
+        //obtengo el id del usuario
+        $session = session();
+        $idUsuario = $session->get('id_usuario');
+
+        //Creo el modelo y llamo a la funcion para recuperar los patrocinios (esta creada dentro del model)
+        $usuarioPatrocinaModel = new UsuarioPatrocinaProyectoModel();
+        $proyectos = $usuarioPatrocinaModel->obtenerProyectosConMontoPorUsuario($idUsuario);
+
+        // Pasamos los datos a la vista
+        return $this->layout('view_misPatrocinios', ['proyectos' => $proyectos]);
+    }*/
+
+    #Antes del refactoring misPatrocinios:  Antes del refactoring misPatrocinios:  Antes del refactoring misPatrocinios:  Antes del refactoring misPatrocinios:
     {
         $proyectos = new ProyectoModel();
         $db = db_connect();
@@ -97,12 +114,10 @@ class ProyectosController extends BaseController
         $sql = 'SELECT p.*, u.monto FROM `usuario_patrocina_proyecto` u JOIN `proyectos` p ON p.id_proyecto = u.id_proyecto WHERE u.id_usuario = ?;';
         $query = $db->query($sql, [$id_usuario]); // Usa un array para pasar el valor del marcador de posición
 
-
-
         $proyectos = $query->getResult();
         $data = array('proyectos' => $proyectos);
 
- 
+
         return $this->layout('view_misPatrocinios', $data);
     }
 
