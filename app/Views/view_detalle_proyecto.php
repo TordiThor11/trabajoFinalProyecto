@@ -14,7 +14,11 @@
         <div class="row g-4">
             <!-- Columna Principal -->
             <div class="col-lg-8">
-                <!-- Carrusel de imágenes -->
+                <!-- Imagen del Proyecto -->
+                <img src="<?= base_url('uploads/proyectos/' . $proyecto->imagen_principal) ?>" class="d-block w-100 img-fluid" alt="Imagen del Proyecto" style="object-fit: cover; height: 800px;">
+
+                <!-- Carrusel de imágenes, se oculto el carrousel para la primera entrega -->
+                <!--COMIENZA EL COMENTARIO
                 <div class="card border-0 shadow-sm mb-4">
                     <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" style="max-height: 800px;">
                         <div class="carousel-indicators">
@@ -41,6 +45,7 @@
                         </button>
                     </div>
                 </div>
+                TERMINA EL COMENTARIO -->
 
                 <!-- Tabs de Información -->
                 <div class="card border-0 shadow-sm">
