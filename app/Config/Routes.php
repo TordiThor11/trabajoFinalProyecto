@@ -24,8 +24,9 @@ $routes->get('/detalleProyecto/(:num)', 'ProyectosController::mostrarDetalle/$1'
 
 
 $routes->get('login', 'LoginController::index');
+$routes->post('login', 'LoginController::login');
 
-$routes->post('login', 'LoginController::login', ['filter' => 'isAdmin']);
+//$routes->post('login', 'LoginController::login', ['filter' => 'isAdmin']); Ya no es necesario
 $routes->get('logout', 'LoginController::logout');
 
 $routes->get('registrar', 'RegistrarController::index');
@@ -40,3 +41,5 @@ $routes->post('proyectos/patrocinar/(:num)', 'ProyectosController::patrocinar/$1
 $routes->get('proyectos/ventanaDePago/(:num)', 'ProyectosController::ventanaDePago/$1', ['filter' => 'autenticacion']);
 $routes->get('/configuracion_perfil', 'ConfiguracionPerfilController::index'); 
 $routes->post('/configuracion_perfil/guardar', 'ConfiguracionPerfilController::guardar');
+
+$routes->get('proyectos/darBaja/(:num)', 'ProyectosController::darBajaProyecto/$1');

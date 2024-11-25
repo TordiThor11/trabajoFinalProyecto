@@ -19,10 +19,10 @@ class AdminFilter implements FilterInterface
         $session = session();
         $tipoDeSession = $session->get('tipo_usuario');
         // Verificar si el usuario es un administrador
-        if ($tipoDeSession === "1") {
+        //if ($tipoDeSession === "1") {
             // Redirigir a la pagina del administrador en caso de ser correspondido
-            dd("El usuario es admin, deberia ser redirigido a la pagina del admin");
+        //    dd("El usuario es admin, deberia ser redirigido a la pagina del admin");
             // return redirect()->to(base_url('login'))->with('error', 'Debes iniciar sesión para acceder.');
-        }
+        //}
     }
 }

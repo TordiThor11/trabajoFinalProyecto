@@ -165,4 +165,15 @@ class ProyectosController extends BaseController
         $data = array('id_proyecto' => $idProyecto);; //recibo el id pasado via get/parametros y lo envio al formulario de pago
         return $this->layout('view_patrocinar_proyecto', $data);
     }
+
+    public function darBajaProyecto($idProyecto)
+    {   
+        $db = db_connect();
+        
+        $sql = 'UPDATE `proyectos` SET `activo` = 0 WHERE `proyectos`.`id_proyecto` = ?;';
+        $query = $db->query($sql, [$idProyecto]); // Usa un array para pasar el valor del marcador de posición
+        
+        $data = array();
+        return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
+    }
 }
