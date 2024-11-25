@@ -1,127 +1,139 @@
-<!-- Contenido Principal -->
-<div class="main-content">
-    <div class="container-fluid mt-4">
-        <div class="row">
-            <!-- Carrusel de imágenes -->
-            <div class="col-md-8">
-                <h1><?= $proyecto->nombre ?></h1>
-                <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/800x600" class="d-block w-100" alt="Project Image 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://via.placeholder.com/800x600" class="d-block w-100" alt="Project Image 2">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://via.placeholder.com/800x600" class="d-block w-100" alt="Project Image 3">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel"
-                        data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel"
-                        data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Barra lateral -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Información del autor -->
-                        <div class="d-flex align-items-center mb-4">
-                            <img src="https://via.placeholder.com/60x60" class="rounded-circle me-3"
-                                alt="Author avatar">
-                            <div>
-                                <h5 class="mb-0"><?= $project->author_name ?? 'Nombre del Autor' ?></h5>
-                                <small class="text-muted">Published: <?= date('M d, Y') ?></small>
-                            </div>
-                        </div>
-
-                        <!-- Botones de acción -->
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-outline-danger" onclick="alert('Funcionalidad en desarrollo')">
-                                <i class="bi bi-heart"></i>
-                                Favorito
-                            </button>
-
-
-                            <button class="btn btn-primary" onclick="window.location.href='<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>'">
-                                <i class="bi bi-star"></i>
-                                Patrocinar
-                            </button>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Presupuesto Requerido</h5>
-                                        <div class="project-description">
-                                            <?= $proyecto->presupuesto_requerido ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Fecha Limite</h5>
-                                        <div class="project-description">
-                                            <?= $proyecto->fecha_limite ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Monto Recaudado</h5>
-                                        <div class="project-description">
-                                            <?= $proyecto->montoTotal ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+<div class="main-content bg-light py-4">
+    <div class="container">
+        <!-- Encabezado del Proyecto -->
+        <div class="mb-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?= base_url('') ?>" class="text-decoration-none">Proyectos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= $proyecto->nombre ?></li>
+                </ol>
+            </nav>
+            <h1 class="display-5 fw-bold mb-0"><?= $proyecto->nombre ?></h1>
         </div>
 
-        <!-- Descripción del proyecto -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card">
+        <div class="row g-4">
+            <!-- Columna Principal -->
+            <div class="col-lg-8">
+                <!-- Carrusel de imágenes -->
+                <div class="card border-0 shadow-sm mb-4">
+                    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
+                            <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="2"></button>
+                        </div>
+                        <div class="carousel-inner rounded-top">
+                            <div class="carousel-item active">
+                                <img src="https://via.placeholder.com/800x500" class="d-block w-100" alt="Project Image 1">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://via.placeholder.com/800x500" class="d-block w-100" alt="Project Image 2">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://via.placeholder.com/800x500" class="d-block w-100" alt="Project Image 3">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabs de Información -->
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white">
+                        <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#detalle">Detalle</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#recompensas">Recompensas</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#objetivo">Objetivo</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#impacto">Impacto</button>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-title">Detalle</h3>
-                        <div class="project-description">
-                            <?= $proyecto->detalle ?>
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="detalle">
+                                <h4 class="fw-bold mb-3">Detalle del Proyecto</h4>
+                                <p class="text-muted"><?= $proyecto->detalle ?></p>
+                            </div>
+                            <div class="tab-pane fade" id="recompensas">
+                                <h4 class="fw-bold mb-3">Plan de Recompensas</h4>
+                                <p class="text-muted"><?= $proyecto->plan_recompensas ?></p>
+                            </div>
+                            <div class="tab-pane fade" id="objetivo">
+                                <h4 class="fw-bold mb-3">Objetivo del Proyecto</h4>
+                                <p class="text-muted"><?= $proyecto->objetivo ?></p>
+                            </div>
+                            <div class="tab-pane fade" id="impacto">
+                                <h4 class="fw-bold mb-3">Impacto Esperado</h4>
+                                <p class="text-muted"><?= $proyecto->impacto_esperado ?></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
+            </div>
+
+            <!-- Barra Lateral -->
+            <div class="col-lg-4">
+                <!-- Tarjeta del Autor -->
+                <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
-                        <h3 class="card-title">Plan Recompensas</h3>
-                        <div class="project-description">
-                            <?= $proyecto->plan_recompensas ?>
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Author avatar">
+                            <div>
+                                <h5 class="fw-bold mb-0"><?= $proyecto->author_name ?? 'Nombre del Autor' ?></h5>
+                                <small class="text-muted">Publicado: <?= date('d M Y') ?></small>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Objetivo</h3>
-                        <div class="project-description">
-                            <?= $proyecto->objetivo ?>
+
+                        <!-- Métricas del Proyecto -->
+                        <div class="progress mb-3" style="height: 10px;">
+                            <?php 
+                            $porcentaje = ($proyecto->montoTotal / $proyecto->presupuesto_requerido) * 100;
+                            $porcentaje = min($porcentaje, 100);
+                            ?>
+                            <div class="progress-bar bg-success" style="width: <?= $porcentaje ?>%"></div>
                         </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Impacto Esperado</h3>
-                        <div class="project-description">
-                            <?= $proyecto->impacto_esperado ?>
+                        <div class="d-flex justify-content-between mb-4">
+                            <div class="text-center">
+                                <h5 class="fw-bold mb-0">$<?= number_format($proyecto->montoTotal, 0, '.', ',') ?></h5>
+                                <small class="text-muted">Recaudado</small>
+                            </div>
+                            <div class="text-center">
+                                <h5 class="fw-bold mb-0">$<?= number_format($proyecto->presupuesto_requerido, 0, '.', ',') ?></h5>
+                                <small class="text-muted">Meta</small>
+                            </div>
+                            <div class="text-center">
+                                <h5 class="fw-bold mb-0"><?= $porcentaje ?>%</h5>
+                                <small class="text-muted">Completado</small>
+                            </div>
+                        </div>
+
+                        <!-- Fecha Límite -->
+                        <div class="alert alert-info mb-4">
+                            <i class="bi bi-calendar-event me-2"></i>
+                            Fecha límite: <?= date('d M Y', strtotime($proyecto->fecha_limite)) ?>
+                        </div>
+
+                        <!-- Botones de Acción -->
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-outline-danger">
+                                <i class="bi bi-heart me-2"></i>Favorito
+                            </button>
+                            <a href="<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>" 
+                               class="btn btn-primary">
+                                <i class="bi bi-star me-2"></i>Patrocinar Proyecto
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -130,14 +142,19 @@
     </div>
 </div>
 
-<!-- JavaScript para el carrusel -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Inicializar carrusel
-        const carousel = new bootstrap.Carousel(document.querySelector('#projectCarousel'), {
-            interval: 5000,
-            wrap: true,
-            keyboard: true
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar carrusel
+    new bootstrap.Carousel(document.querySelector('#projectCarousel'), {
+        interval: 5000,
+        wrap: true,
+        keyboard: true
     });
+
+    // Inicializar tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+});
 </script>

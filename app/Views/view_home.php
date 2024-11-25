@@ -1,65 +1,107 @@
-<!-- Search Bar Section -->
-<div class="search-container">
+<!-- Hero Section -->
+<div class="bg-light py-5 mb-5">
     <div class="container">
-        <div class="search-input">
-            <input type="text" class="form-control" placeholder="Buscar proyectos..." id="searchProjects">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start">
+                <h1 class="display-4 fw-bold mb-4">Descubre Proyectos Innovadores</h1>
+                <p class="lead text-muted mb-4">Encuentra y apoya proyectos únicos que están cambiando el mundo</p>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white p-3 rounded shadow-sm">
+                    <div class="input-group">
+                        <span class="input-group-text bg-white">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                        <input type="text" 
+                               class="form-control border-start-0" 
+                               placeholder="Buscar proyectos..." 
+                               id="searchProjects"
+                               aria-label="Buscar proyectos">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Project Cards Section (tu código existente) -->
-<div class="container mt-5">
-    <div class="row">
-        <?php foreach ($proyectos as $proyecto): ?>
-            <div class="col-md-4 project-item">
-                <div class="card">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="<?= $proyecto->nombre; ?>">
-                    <div class="card-body">
-                        <h5 class="card-title"><?= $proyecto->nombre; ?></h5>
-                        <p class="card-text"><?= $proyecto->fecha_limite; ?></p>
-                        <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" 
-                        class="btn btn-primary">Ver más</a>
-                    </div> 
+<!-- Project Cards Section -->
+<div class="container">
+    <div class="row" id="projectsContainer">
+        <?php if (empty($proyectos)): ?>
+            <div class="col-12 text-center py-5">
+                <div class="alert alert-info d-inline-block">
+                    <i class="fas fa-info-circle me-2"></i>
+                    No se encontraron proyectos disponibles en este momento.
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php else: ?>
+            <?php foreach ($proyectos as $proyecto): ?>
+                <div class="col-md-4 mb-4 project-item">
+                    <div class="card h-100 shadow-sm">
+                        <div class="position-relative">
+                            <img src="https://via.placeholder.com/350x200" 
+                                 class="card-img-top object-fit-cover"
+                                 style="height: 200px;"
+                                 alt="<?= htmlspecialchars($proyecto->nombre); ?>">
+                            <div class="position-absolute top-0 end-0 p-2">
+                                <span class="badge bg-primary">
+                                    <?= date('d M Y', strtotime($proyecto->fecha_limite)); ?>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-3"><?= htmlspecialchars($proyecto->nombre); ?></h5>
+                            <div class="mt-auto">
+                                <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" 
+                                   class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-arrow-right me-2"></i>Ver más
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
 
-
-
-
-    <script>
-    // Esperamos a que el DOM esté completamente cargado antes de ejecutar cualquier código
-    document.addEventListener('DOMContentLoaded', function() {
-        // Obtenemos el elemento de entrada (el input) por su ID 'searchProjects'
-        const searchInput = document.getElementById('searchProjects');
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchProjects');
+    const projectsContainer = document.getElementById('projectsContainer');
+    
+    searchInput.addEventListener('input', function(e) {
+        const searchText = e.target.value.toLowerCase();
+        const projects = document.querySelectorAll('.project-item');
+        let foundProjects = false;
         
-        // Agregamos un evento 'input' que se dispara cada vez que el usuario escribe o modifica el texto
-        searchInput.addEventListener('input', function(e) {
-            // Convertimos el texto ingresado a minúsculas para hacer una búsqueda sin distinguir mayúsculas/minúsculas
-            const searchText = e.target.value.toLowerCase();
-            
-            // Seleccionamos todos los elementos que tienen la clase 'project-item'
-            // Esto nos da un NodeList (similar a un array) con todas las tarjetas de proyectos
-            const projects = document.querySelectorAll('.project-item');
-            
-            // Recorremos cada proyecto encontrado
-            projects.forEach(project => {
-                // Dentro de cada proyecto, buscamos el elemento que tiene la clase 'card-title'
-                // y obtenemos su texto (el título del proyecto) en minúsculas
-                const title = project.querySelector('.card-title').textContent.toLowerCase();
-                
-                // Comparamos si el título contiene el texto buscado
-                if (title.includes(searchText)) {
-                    // Si el título contiene el texto buscado, mostramos el proyecto
-                    // (dejamos el display en su valor predeterminado)
-                    project.style.display = '';
-                } else {
-                    // Si el título NO contiene el texto buscado, ocultamos el proyecto
-                    project.style.display = 'none';
-                }
-            });
+        projects.forEach(project => {
+            const title = project.querySelector('.card-title').textContent.toLowerCase();
+            if (title.includes(searchText)) {
+                project.classList.remove('d-none');
+                foundProjects = true;
+            } else {
+                project.classList.add('d-none');
+            }
         });
+
+        // Mostrar mensaje cuando no hay resultados
+        const noResultsMessage = document.querySelector('.no-results');
+        if (!foundProjects) {
+            if (!noResultsMessage) {
+                const message = document.createElement('div');
+                message.className = 'col-12 text-center py-5 no-results';
+                message.innerHTML = `
+                    <div class="alert alert-info d-inline-block">
+                        <i class="fas fa-search me-2"></i>
+                        No se encontraron proyectos que coincidan con "${searchText}"
+                    </div>
+                `;
+                projectsContainer.appendChild(message);
+            }
+        } else if (noResultsMessage) {
+            noResultsMessage.remove();
+        }
     });
-    </script>
+});
+</script>
