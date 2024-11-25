@@ -16,7 +16,7 @@
             <div class="col-lg-8">
                 <!-- Carrusel de imágenes -->
                 <div class="card border-0 shadow-sm mb-4">
-                    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" style="max-height: 800px;">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="0" class="active"></button>
                             <button type="button" data-bs-target="#projectCarousel" data-bs-slide-to="1"></button>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="carousel-inner rounded-top">
                             <div class="carousel-item active">
-                                <img src="https://via.placeholder.com/800x500" class="d-block w-100" alt="Project Image 1">
+                                <img src="<?= base_url('uploads/proyectos/' . $proyecto->imagen_principal) ?>" class="d-block w-100 img-fluid" alt="Imagen del Proyecto" style="object-fit: cover; height: 800px;">
                             </div>
                             <div class="carousel-item">
                                 <img src="https://via.placeholder.com/800x500" class="d-block w-100" alt="Project Image 2">
@@ -98,7 +98,7 @@
 
                         <!-- Métricas del Proyecto -->
                         <div class="progress mb-3" style="height: 10px;">
-                            <?php 
+                            <?php
                             $porcentaje = ($proyecto->montoTotal / $proyecto->presupuesto_requerido) * 100;
                             $porcentaje = min($porcentaje, 100);
                             ?>
@@ -130,8 +130,8 @@
                             <button class="btn btn-outline-danger">
                                 <i class="bi bi-heart me-2"></i>Favorito
                             </button>
-                            <a href="<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>" 
-                               class="btn btn-primary">
+                            <a href="<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>"
+                                class="btn btn-primary">
                                 <i class="bi bi-star me-2"></i>Patrocinar Proyecto
                             </a>
                         </div>
@@ -143,18 +143,18 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar carrusel
-    new bootstrap.Carousel(document.querySelector('#projectCarousel'), {
-        interval: 5000,
-        wrap: true,
-        keyboard: true
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar carrusel
+        new bootstrap.Carousel(document.querySelector('#projectCarousel'), {
+            interval: 5000,
+            wrap: true,
+            keyboard: true
+        });
 
-    // Inicializar tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
+        // Inicializar tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
     });
-});
 </script>
