@@ -176,4 +176,28 @@ class ProyectosController extends BaseController
         $data = array();
         return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
     }
+
+    public function buscarProyectoModificar($idProyecto)
+    {   
+        $db = db_connect();
+        #Obtengo los datos usando el model
+        $model = new ProyectoModel();
+        $proyecto = $model->find($idProyecto);
+
+        $data = array('proyecto' => $proyecto);
+        return $this->layout('view_modificar_proyecto', $data);
+    }
+
+    public function proyectoModificar($idProyecto)
+    {   
+        $db = db_connect();
+        #Obtengo los datos usando el model
+        
+        $detalle = $this->request->getPost(['proyectoDetalle']); 
+
+        $sql = 'UPDATE `proyectos` SET `detalle` = ? WHERE `proyectos`.`id_proyecto` = ?;';
+        $query = $db->query($sql, [$detalle, $idProyecto]); 
+
+        return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
+    }
 }

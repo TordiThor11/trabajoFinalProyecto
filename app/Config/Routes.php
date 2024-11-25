@@ -43,3 +43,8 @@ $routes->get('/configuracion_perfil', 'ConfiguracionPerfilController::index');
 $routes->post('/configuracion_perfil/guardar', 'ConfiguracionPerfilController::guardar');
 
 $routes->get('proyectos/darBaja/(:num)', 'ProyectosController::darBajaProyecto/$1');
+
+$routes->get('/preModificarProyecto/(:num)', 'ProyectosController::buscarProyectoModificar/$1');
+
+$routes->post('/modificarProyecto/(:num)', 'ProyectosController::proyectoModificar/$1');
+
