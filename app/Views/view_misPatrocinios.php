@@ -1,16 +1,16 @@
 
-    <div class="container mt-3">
-       
-    <?php foreach ($proyectos as $proyecto): ?>
-        <div class="item d-flex justify-content-between align-items-center">
+<div class="container mt-3">
+    <ul class="list-group">
+        <?php foreach ($proyectos as $proyecto): ?>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
             <div><?=$proyecto->nombre?> -- Monto Invertido: <?=$proyecto->monto?> </div>
             <div>
             <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" 
             class="btn btn-primary">Ver Proyecto</a>
-            </div>
-        </div>
+            </li>
         <?php endforeach; ?>
-    </div>
+    </ul>
+</div>
 
     
 
