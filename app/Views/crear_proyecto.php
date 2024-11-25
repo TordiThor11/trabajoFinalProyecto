@@ -51,7 +51,7 @@
             </div>
 
             <div class="form-group">
-                <label for="imagen_principal">Imagen del Proyecto</label>
+                <label for="imagen_principal">Imagen del Proyecto. Se recomienda una resolucion similar a 800x600px.</label>
                 <input type="file" class="form-control-file" id="imagen_principal" name="imagen_principal" accept="image/*" required>
             </div>
 
