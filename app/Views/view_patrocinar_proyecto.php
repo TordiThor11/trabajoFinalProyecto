@@ -19,7 +19,7 @@
                     <!-- Monto de Donación -->
                     <div class="mb-3">
                         <label for="montoInversion" class="form-label">Monto de Inversión</label>
-                        <input type="number" class="form-control" id="montoInversion" name="montoInversion" placeholder="Ej: 5000" required>
+                        <input type="number" class="form-control" id="montoInversion" name="montoInversion" placeholder="Ej: 5000" min="1" required>
                     </div>
 
                     <!-- Nombre en la Tarjeta -->
@@ -57,6 +57,18 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Validación personalizada para el monto
+        document.querySelector("form").addEventListener("submit", function(event) {
+            const monto = document.getElementById("montoInversion");
+            if (monto.value <= 0) {
+                event.preventDefault(); // Previene el envío del formulario
+                monto.classList.add("is-invalid");
+            } else {
+                monto.classList.remove("is-invalid");
+            }
+        });
+    </script>
 </body>
 
 </html>
