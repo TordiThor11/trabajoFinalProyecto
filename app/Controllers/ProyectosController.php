@@ -152,6 +152,10 @@ class ProyectosController extends BaseController
 
         //Guardo los el monto enviado desde el formulario en una variable
         $montoInversion = $this->request->getPost(['montoInversion']);    //Tambien se pueden pedir los demas datos del formulario de pago, no lo considero necesario
+        // Verificar que el monto sea mayor a 0
+        if ($montoInversion <= 0) {
+            return redirect()->back()->with('error', 'El monto debe ser mayor a 0.');
+        }
 
         //Guardo los datos en la db
         $db = db_connect(); // $proyectoModel = new ProyectoModel();

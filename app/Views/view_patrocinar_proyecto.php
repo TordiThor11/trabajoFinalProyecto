@@ -15,6 +15,17 @@
             <div class="card-body">
                 <h5 class="card-title">Detalles de Pago</h5>
 
+                <!-- Dispara un cartel de error si el monto es 0 o negativo -->
+                <?php if (session()->get('error')): ?>
+                    <div class="alert alert-danger">
+                        <?= session()->get('error') ?>
+                    </div>
+                <?php endif; ?>
+
+
+
+
+
                 <form action="<?= base_url('proyectos/patrocinar/' . $id_proyecto) ?>" method="POST">
                     <!-- Monto de Donación -->
                     <div class="mb-3">
