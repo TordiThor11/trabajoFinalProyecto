@@ -1,67 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <!-- Encabezado del formulario -->
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold">Crear Nuevo Proyecto</h2>
+                            <p class="text-muted">Complete los detalles de su proyecto para comenzar</p>
+                        </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Proyecto</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
+                        <form action="<?= base_url('proyectos/save') ?>" method="post" enctype="multipart/form-data">
+                            <!-- Información básica -->
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-info-circle me-2"></i>Información Básica</h5>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre del Proyecto</label>
+                                    <input type="text" class="form-control form-control-lg" id="nombre" name="nombre" 
+                                           placeholder="Ej: Mi Proyecto Innovador" required>
+                                </div>
 
-<body>
+                                <div class="mb-3">
+                                    <label for="objetivo" class="form-label">Objetivo</label>
+                                    <input type="text" class="form-control" id="objetivo" name="objetivo" 
+                                           placeholder="Ej: Desarrollar una solución sostenible..." required>
+                                </div>
+                            </div>
 
+                            <!-- Detalles del proyecto -->
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-file-text me-2"></i>Detalles del Proyecto</h5>
+                                <div class="mb-3">
+                                    <label for="detalle" class="form-label">Descripción Detallada</label>
+                                    <textarea class="form-control" id="detalle" name="detalle" rows="4" 
+                                              placeholder="Describe detalladamente tu proyecto..." required></textarea>
+                                </div>
 
-    <!-- Formulario de Creación de Proyecto -->
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Crear un Nuevo Proyecto</h2>
-        <form action="<?= base_url('proyectos/save') ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="nombre">Nombre del Proyecto</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre del proyecto" required>
+                                <div class="mb-3">
+                                    <label for="impacto_esperado" class="form-label">Impacto Esperado</label>
+                                    <textarea class="form-control" id="impacto_esperado" name="impacto_esperado" rows="4" 
+                                              placeholder="¿Qué cambios positivos generará tu proyecto?" required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Financiamiento y fechas -->
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-currency-dollar me-2"></i>Financiamiento y Plazos</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="presupuesto_requerido" class="form-label">Presupuesto Requerido (USD)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="presupuesto_requerido" 
+                                                   name="presupuesto_requerido" placeholder="0.00" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fecha_limite" class="form-label">Fecha Límite</label>
+                                        <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" required>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="plan_recompensas" class="form-label">Plan de Recompensas</label>
+                                    <textarea class="form-control" id="plan_recompensas" name="plan_recompensas" rows="3" 
+                                              placeholder="Describe las recompensas para los patrocinadores..." required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Imagen -->
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-image me-2"></i>Imagen del Proyecto</h5>
+                                <div class="mb-3">
+                                    <label for="imagen_principal" class="form-label">Imagen Principal</label>
+                                    <input type="file" class="form-control" id="imagen_principal" name="imagen_principal" 
+                                           accept="image/*" required>
+                                    <div class="form-text">Sube una imagen representativa de tu proyecto</div>
+                                </div>
+                            </div>
+
+                            <!-- Botón de envío -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-rocket-takeoff me-2"></i>Crear Proyecto
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="plan_recompensas">Plan de Recompensas</label>
-                <input type="text" class="form-control" id="plan_recompensas" name="plan_recompensas" placeholder="Describa el plan de recompensas" required>
-            </div>
-
-            <div class="form-group">
-                <label for="fecha_limite">Fecha Límite</label>
-                <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" required>
-            </div>
-
-            <div class="form-group">
-                <label for="detalle">Detalle del Proyecto</label>
-                <textarea class="form-control" id="detalle" name="detalle" rows="3" placeholder="Detalles del proyecto" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="impacto_esperado">Impacto Esperado</label>
-                <textarea class="form-control" id="impacto_esperado" name="impacto_esperado" rows="3" placeholder="Descripción del impacto esperado" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="objetivo">Objetivo</label>
-                <input type="text" class="form-control" id="objetivo" name="objetivo" placeholder="Objetivo del proyecto" required>
-            </div>
-
-            <div class="form-group">
-                <label for="presupuesto_requerido">Presupuesto Requerido</label>
-                <input type="number" class="form-control" id="presupuesto_requerido" name="presupuesto_requerido" placeholder="Presupuesto en $USD" required>
-            </div>
-
-            <div class="form-group">
-                <label for="imagen_principal">Imagen del Proyecto.</label>
-                <input type="file" class="form-control-file" id="imagen_principal" name="imagen_principal" accept="image/*" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block">Crear Proyecto</button>
-        </form>
+        </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+ 

@@ -98,7 +98,7 @@ class ProyectosController extends BaseController
         $session = session();
         $id_usuario = $session->get('id_usuario');
 
-        $sql = 'SELECT * FROM `proyectos` p WHERE p.id_usuario_creador = 1;';
+        $sql = 'SELECT * FROM `proyectos` p WHERE p.id_usuario_creador = ?;';
         $query = $db->query($sql, $id_usuario);
 
 

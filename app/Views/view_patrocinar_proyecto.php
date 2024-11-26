@@ -1,85 +1,117 @@
-<!DOCTYPE html>
-<html lang="en">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold"><i class="bi bi-credit-card me-2"></i>Completar Pago</h2>
+                    <p class="text-muted">Complete los detalles para realizar su patrocinio</p>
+                </div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantalla de Pago</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">Completar Pago</h2>
-        <div class="card mx-auto" style="max-width: 500px;">
-            <div class="card-body">
-                <h5 class="card-title">Detalles de Pago</h5>
-
-                <!-- Dispara un cartel de error si el monto es 0 o negativo -->
                 <?php if (session()->get('error')): ?>
-                    <div class="alert alert-danger">
-                        <?= session()->get('error') ?>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        <div><?= session()->get('error') ?></div>
                     </div>
                 <?php endif; ?>
 
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <form action="<?= base_url('proyectos/patrocinar/' . $id_proyecto) ?>" method="POST" id="paymentForm">
+                            <!-- Monto de Inversión -->
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-currency-dollar me-2"></i>Monto de Inversión</h5>
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control form-control-lg" id="montoInversion" 
+                                           name="montoInversion" placeholder="Monto" min="1" required>
+                                    <label for="montoInversion">Monto en USD</label>
+                                    <div class="invalid-feedback">
+                                        El monto debe ser mayor a 0
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Detalles de la Tarjeta -->
+                            <div class="mb-4">
+                                <h5 class="fw-bold mb-3"><i class="bi bi-credit-card-2-front me-2"></i>Detalles de la Tarjeta</h5>
+                                
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="cardName" name="cardName" 
+                                           placeholder="Nombre" required>
+                                    <label for="cardName">Nombre en la Tarjeta</label>
+                                </div>
 
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="cardNumber" name="cardNumber" 
+                                           placeholder="Número" maxlength="19" required>
+                                    <label for="cardNumber">Número de Tarjeta</label>
+                                </div>
 
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" 
+                                                   placeholder="MM/AA" maxlength="5" required>
+                                            <label for="expiryDate">Fecha de Expiración</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="cvv" name="cvv" 
+                                                   placeholder="CVV" maxlength="4" required>
+                                            <label for="cvv">CVV</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                <form action="<?= base_url('proyectos/patrocinar/' . $id_proyecto) ?>" method="POST">
-                    <!-- Monto de Donación -->
-                    <div class="mb-3">
-                        <label for="montoInversion" class="form-label">Monto de Inversión</label>
-                        <input type="number" class="form-control" id="montoInversion" name="montoInversion" placeholder="Ej: 5000" min="1" required>
+                            <!-- Botones -->
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-lock-fill me-2"></i>Pagar Ahora
+                                </button>
+                                <a href="<?= base_url('proyectos') ?>" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left me-2"></i>Cancelar
+                                </a>
+                            </div>
+                        </form>
                     </div>
+                </div>
 
-                    <!-- Nombre en la Tarjeta -->
-                    <div class="mb-3">
-                        <label for="cardName" class="form-label">Nombre en la Tarjeta</label>
-                        <input type="text" class="form-control" id="cardName" name="cardName" placeholder="Nombre completo" required>
-                    </div>
-
-                    <!-- Número de Tarjeta -->
-                    <div class="mb-3">
-                        <label for="cardNumber" class="form-label">Número de Tarjeta</label>
-                        <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="0000 0000 0000 0000" required>
-                    </div>
-
-                    <!-- Fecha de Expiración y CVV -->
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="expiryDate" class="form-label">Fecha de Expiración</label>
-                            <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/AA" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="cvv" class="form-label">CVV</label>
-                            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123" required>
-                        </div>
-                    </div>
-
-                    <!-- Botón de Pago -->
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Pagar</button>
-                    </div>
-                </form>
+                <!-- Información de Seguridad -->
+                <div class="text-center mt-4">
+                    <small class="text-muted">
+                        <i class="bi bi-shield-lock me-1"></i>
+                        Sus datos están protegidos con encriptación de 256 bits
+                    </small>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Validación personalizada para el monto
-        document.querySelector("form").addEventListener("submit", function(event) {
-            const monto = document.getElementById("montoInversion");
+        // Formateo del número de tarjeta
+        document.getElementById('cardNumber').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(.{4})/g, '$1 ').trim();
+            e.target.value = value;
+        });
+
+        // Formateo de la fecha de expiración
+        document.getElementById('expiryDate').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Validación del formulario
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            const monto = document.getElementById('montoInversion');
             if (monto.value <= 0) {
-                event.preventDefault(); // Previene el envío del formulario
-                monto.classList.add("is-invalid");
+                event.preventDefault();
+                monto.classList.add('is-invalid');
+                monto.focus();
             } else {
-                monto.classList.remove("is-invalid");
+                monto.classList.remove('is-invalid');
             }
         });
     </script>
-</body>
-
-</html>
