@@ -105,10 +105,10 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-4">
-                            <img src="https://via.placeholder.com/60x60" class="rounded-circle me-3"
-                                alt="Author avatar">
+                            <!--<img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Author avatar">-->
+                            <i class="bi bi-person-circle me-3" style="font-size: 60px; width: 60px; height: 60px; line-height: 60px; text-align: center; background-color: #f0f0f0; display: inline-block; border-radius: 50%;"></i><!-- Nuevo icono de usuario -->
                             <div>
-                                <h5 class="fw-bold mb-0"><?= $proyecto->author_name ?? 'Nombre del Autor' ?></h5>
+                                <h5 class="fw-bold mb-0"><?= $mail_usuario ?? 'Nombre del Autor' ?></h5>
                                 <small class="text-muted">Publicado: <?= date('d M Y') ?></small>
                             </div>
                         </div>
@@ -158,13 +158,13 @@
                             $tipoUsuario = $session->get('tipo_usuario');
 
                             if ($tipoUsuario == 1):
-                                ?>
+                            ?>
                                 <a href="<?= base_url('proyectos/darBaja/' . $proyecto->id_proyecto) ?>"
                                     class="btn btn-primary">
                                     <i class="bi bi-star me-2"></i>Dar de baja Proyecto
                                 </a>
 
-                                <?php if ($proyecto->activo == 1):?>
+                                <?php if ($proyecto->activo == 1): ?>
                                     <h1>Esta activo</h1>
                                 <?php else: ?>
                                     <h1>Fue dado de baja</h1>
@@ -180,7 +180,7 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         // Inicializar carrusel
         new bootstrap.Carousel(document.querySelector('#projectCarousel'), {
             interval: 5000,
@@ -190,7 +190,7 @@
 
         // Inicializar tooltips
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        tooltipTriggerList.map(function (tooltipTriggerEl) {
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
             return new bootstrap.Tooltip(tooltipTriggerEl)
         });
     });
