@@ -145,9 +145,11 @@
 
                         <!-- Botones de Acción -->
                         <div class="d-grid gap-2">
+                            <!-- Boton de favorito, ocultado temporalmente 
                             <button class="btn btn-outline-danger">
                                 <i class="bi bi-heart me-2"></i>Favorito
                             </button>
+                                                                            -->
                             <a href="<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>"
                                 class="btn btn-primary">
                                 <i class="bi bi-star me-2"></i>Patrocinar Proyecto
