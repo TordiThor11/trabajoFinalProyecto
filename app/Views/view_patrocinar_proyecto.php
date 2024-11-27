@@ -68,20 +68,12 @@
                                 <button type="submit" class="btn btn-primary btn-lg">
                                     <i class="bi bi-lock-fill me-2"></i>Pagar Ahora
                                 </button>
-                                <a href="<?= base_url('proyectos') ?>" class="btn btn-outline-secondary">
+                                <button type="button" onclick="window.history.back()" class="btn btn-outline-secondary">
                                     <i class="bi bi-arrow-left me-2"></i>Cancelar
-                                </a>
+                                </button>
                             </div>
                         </form>
                     </div>
-                </div>
-
-                <!-- Información de Seguridad -->
-                <div class="text-center mt-4">
-                    <small class="text-muted">
-                        <i class="bi bi-shield-lock me-1"></i>
-                        Sus datos están protegidos con encriptación de 256 bits
-                    </small>
                 </div>
             </div>
         </div>

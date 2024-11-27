@@ -81,6 +81,7 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
                         <!-- Información del Autor -->
+                       
                         <div class="d-flex align-items-center mb-4">
                             <img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Avatar del Autor">
                             <div>
