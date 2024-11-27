@@ -83,9 +83,10 @@
                         <!-- Información del Autor -->
                        
                         <div class="d-flex align-items-center mb-4">
-                            <img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Avatar del Autor">
+                            <!--<img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Author avatar">-->
+                            <i class="bi bi-person-circle me-3" style="font-size: 60px; width: 60px; height: 60px; line-height: 60px; text-align: center; background-color: #f0f0f0; display: inline-block; border-radius: 50%;"></i><!-- Nuevo icono de usuario -->
                             <div>
-                                <h5 class="fw-bold mb-0"><?= $proyecto->author_name ?? 'Nombre del Autor' ?></h5>
+                                <h5 class="fw-bold mb-0"><?= $mail_usuario ?? 'Nombre del Autor' ?></h5>
                                 <small class="text-muted">Publicado: <?= date('d M Y') ?></small>
                             </div>
                         </div>

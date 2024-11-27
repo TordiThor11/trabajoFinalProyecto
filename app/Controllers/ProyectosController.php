@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProyectoModel;
+use App\Models\UserModel;
 use App\Models\UsuarioPatrocinaProyectoModel;
 use CodeIgniter\Database\Database;
 
@@ -67,18 +68,20 @@ class ProyectosController extends BaseController
         $sql = 'SELECT SUM(p.monto) as monto FROM usuario_patrocina_proyecto p WHERE p.id_proyecto = ?  GROUP BY p.id_proyecto';
         $query = $db->query($sql, $id);
 
-
-
-        //INTENTO DE CORRECION: ERROR AL MOSTRAR EL MONTO TOTAL DE UN PROYECTO SI NO TIENE PATROCINADORES
         // dd($query->getRow());
         if ($query->getRow() == null) {
             $proyecto->montoTotal = 0;
         } else {
             $proyecto->montoTotal = $query->getRow()->monto; //cualquier cosa dejar solo esta linea y borrar todo que esta entre comentarios.
         }
-        //FIN INTENTO DE CORRECION, solo se modifico lo que esta entre comentarios
 
-        $data = array('proyecto' => $proyecto);
+        //Paso el usuario. UserModel trabaja como ARRAY, NO como objeto.
+        $userModel = new UserModel();
+        $usuario = $userModel->find($proyecto->id_usuario_creador);
+
+        //Creo el array con 'mail_usuario' y 'proyecto'.
+        $data = array('mail_usuario' => $usuario['mail'], 'proyecto' => $proyecto);
+
         return $this->layout('view_detalle_proyecto', $data);
     }
 
