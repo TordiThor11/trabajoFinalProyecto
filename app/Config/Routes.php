@@ -39,7 +39,7 @@ $routes->get('misPatrocinios', 'ProyectosController::misPatrocinios', ['filter' 
 $routes->post('proyectos/patrocinar/(:num)', 'ProyectosController::patrocinar/$1'); #Uno de los dos deberia de ser borrado
 
 $routes->get('proyectos/ventanaDePago/(:num)', 'ProyectosController::ventanaDePago/$1', ['filter' => 'autenticacion']);
-$routes->get('/configuracion_perfil', 'ConfiguracionPerfilController::index'); 
+$routes->get('/configuracion_perfil', 'ConfiguracionPerfilController::index');
 $routes->post('/configuracion_perfil/guardar', 'ConfiguracionPerfilController::guardar');
 
 $routes->get('proyectos/darBaja/(:num)', 'ProyectosController::darBajaProyecto/$1');
