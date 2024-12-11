@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\ProyectoModel;
 use App\Models\UserModel;
 use App\Models\UsuarioPatrocinaProyectoModel;
+use App\Models\VersionModel;
 use CodeIgniter\Database\Database;
 
 class ProyectosController extends BaseController
@@ -174,18 +175,18 @@ class ProyectosController extends BaseController
     }
 
     public function darBajaProyecto($idProyecto)
-    {   
+    {
         $db = db_connect();
-        
+
         $sql = 'UPDATE `proyectos` SET `activo` = 0 WHERE `proyectos`.`id_proyecto` = ?;';
         $query = $db->query($sql, [$idProyecto]); // Usa un array para pasar el valor del marcador de posición
-        
+
         $data = array();
         return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
     }
 
     public function buscarProyectoModificar($idProyecto)
-    {   
+    {
         $db = db_connect();
         #Obtengo los datos usando el model
         $model = new ProyectoModel();
@@ -196,15 +197,44 @@ class ProyectosController extends BaseController
     }
 
     public function proyectoModificar($idProyecto)
-    {   
+    {
         $db = db_connect();
         #Obtengo los datos usando el model
-        
-        $detalle = $this->request->getPost(['proyectoDetalle']); 
+
+        $detalle = $this->request->getPost(['proyectoDetalle']);
 
         $sql = 'UPDATE `proyectos` SET `detalle` = ? WHERE `proyectos`.`id_proyecto` = ?;';
-        $query = $db->query($sql, [$detalle, $idProyecto]); 
+        $query = $db->query($sql, [$detalle, $idProyecto]);
 
         return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
+    }
+    public function cargarDatosActualizacionProyecto($idProyecto)
+    {
+        $db = db_connect();
+        #Obtengo los datos usando el model
+        $model = new ProyectoModel();
+        $proyecto = $model->find($idProyecto);
+
+        $data = array('proyecto' => $proyecto);
+        return $this->layout('view_actualizar_proyecto', $data);
+    }
+
+    public function actualizarProyecto($idProyecto) //deberia validar que exista nombre en backend
+    {
+        // helper('date'); // Helper de fechas, se usa en: 'now()'
+
+        $db = db_connect();
+        #creo el objeto version del proyecto
+        $model = new VersionModel();
+
+        //Obtengo los datos del formulario
+        $formData = $this->request->getPost(['actualizacionNombre', 'actualizacionDetalle']);
+
+        // Combino los arreglos y añado la fecha actual
+        $data = array('id_proyecto' => $idProyecto, 'nombre' => $formData['actualizacionNombre'], 'descripcion' => $formData['actualizacionDetalle'], 'fecha' => date('Y-m-d H:i:s')); // Formato compatible con datetime
+
+        // dd($data);
+        $version = $model->save($data);
+        return redirect()->to(base_url('/'));
     }
 }

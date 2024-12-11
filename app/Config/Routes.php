@@ -9,7 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 #En el routeo el primer parametro es el origen y el segundo el destino
 #El destino creo se especifica como 'controlador a usar'::'metodo a llamar dentro del controlador'
 
-$routes->get('/', 'Home::index',['filter' => 'isAdmin'] );
+$routes->get('/', 'Home::index', ['filter' => 'isAdmin']);
 
 $routes->get('/usuarios', 'UsersController::list');
 
@@ -48,3 +48,6 @@ $routes->get('/preModificarProyecto/(:num)', 'ProyectosController::buscarProyect
 
 $routes->post('/modificarProyecto/(:num)', 'ProyectosController::proyectoModificar/$1');
 
+
+$routes->get('/cargarDatosActualizarProyecto/(:num)', 'ProyectosController::cargarDatosActualizacionProyecto/$1'); //actualiar proyecto en view_misProyectos
+$routes->post('/actualizarProyecto/(:num)', 'ProyectosController::actualizarProyecto/$1');//actualiar proyecto en view_misProyectos
