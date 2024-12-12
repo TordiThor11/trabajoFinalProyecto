@@ -59,10 +59,14 @@ abstract class BaseController extends Controller
         $this->db = db_connect();
     }
 
-    public function layout($page, $data){
-        return view('templates/header').
-        view($page, $data).
-        view('templates/footer');
-    }
+    public function layout($page, $data)
+    {
+        $notificationModel = new \App\Models\NotificacionModel();
+        $idUsuario = session()->get('id_usuario');
+        $data['notificaciones_no_leidas'] = $notificationModel->recuperarNotificacionesNoLeidas($idUsuario);
 
+        return view('templates/header', $data) .
+            view($page, $data) .
+            view('templates/footer');
+    }
 }
