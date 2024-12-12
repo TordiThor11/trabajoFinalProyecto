@@ -10,4 +10,12 @@ class VersionModel extends Model
     protected $primaryKey = 'id_version';
     protected $allowedFields = ['id_version', 'nombre', 'id_proyecto', 'descripcion', 'fecha'];
     protected $returnType = ProyectoModel::class;
+
+    public function obtenerActualizaciones($idProyecto) //no se usa, se remplazo por findall dado por codeigniter
+    {
+
+        $sql = 'SELECT * FROM `versiones` WHERE id_proyecto = ?;';
+        $query = $this->db->query($sql, [$idProyecto]);
+        return $query->getResult();
+    }
 }

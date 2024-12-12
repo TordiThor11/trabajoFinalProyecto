@@ -80,8 +80,13 @@ class ProyectosController extends BaseController
         $userModel = new UserModel();
         $usuario = $userModel->find($proyecto->id_usuario_creador);
 
+        //Obtengo las actuqalizacioens del proyecto
+        $versionModel = new VersionModel();
+        $versiones = $versionModel->where('id_proyecto', $id)->findAll();
+
+
         //Creo el array con 'mail_usuario' y 'proyecto'.
-        $data = array('mail_usuario' => $usuario['mail'], 'proyecto' => $proyecto);
+        $data = array('mail_usuario' => $usuario['mail'], 'proyecto' => $proyecto, 'versiones' => $versiones);
 
         return $this->layout('view_detalle_proyecto', $data);
     }

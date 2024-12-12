@@ -19,10 +19,10 @@
             <!-- Columna Principal - Información Detallada -->
             <div class="col-lg-8">
                 <!-- Imagen Principal del Proyecto -->
-                <img src="<?= base_url('uploads/proyectos/' . $proyecto->imagen_principal) ?>" 
-                     class="d-block w-100 img-fluid" 
-                     alt="Imagen del Proyecto" 
-                     style="object-fit: cover; height: 800px;">
+                <img src="<?= base_url('uploads/proyectos/' . $proyecto->imagen_principal) ?>"
+                    class="d-block w-100 img-fluid"
+                    alt="Imagen del Proyecto"
+                    style="object-fit: cover; height: 800px;">
 
                 <!-- Sección de Pestañas de Información -->
                 <div class="card border-0 shadow-sm">
@@ -73,6 +73,40 @@
                         </div>
                     </div>
                 </div>
+                <!-- Sección de Actualizaciones -->
+                <div class="mt-4">
+                    <?php if (!$versiones): ?>
+                        <h4 class="fw-bold mb-3">El proyecto aún no tiene actualizaciones</h4>
+                    <?php else: ?>
+                        <h4 class="fw-bold mb-3">Actualizaciones del Proyecto</h4>
+                        <div class="accordion" id="actualizacionesAccordion">
+                            <?php foreach ($versiones as $index => $actualizacion): ?>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading<?= $index ?>">
+                                        <button class="accordion-button <?= $index === 0 ? '' : 'collapsed' ?>"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapse<?= $index ?>"
+                                            aria-expanded="<?= $index === 0 ? 'true' : 'false' ?>"
+                                            aria-controls="collapse<?= $index ?>">
+                                            <?= htmlspecialchars($actualizacion->nombre) ?>
+                                            (<?= date('d M Y', strtotime($actualizacion->fecha)) ?>)
+                                        </button>
+                                    </h2>
+                                    <div id="collapse<?= $index ?>"
+                                        class="accordion-collapse collapse <?= $index === 0 ? 'show' : '' ?>"
+                                        aria-labelledby="heading<?= $index ?>"
+                                        data-bs-parent="#actualizacionesAccordion">
+                                        <div class="accordion-body">
+                                            <?= nl2br(htmlspecialchars($actualizacion->descripcion)) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
             </div>
 
             <!-- Columna Lateral - Información del Proyecto -->
@@ -81,7 +115,7 @@
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
                         <!-- Información del Autor -->
-                       
+
                         <div class="d-flex align-items-center mb-4">
                             <!--<img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Author avatar">-->
                             <i class="bi bi-person-circle me-3" style="font-size: 60px; width: 60px; height: 60px; line-height: 60px; text-align: center; background-color: #f0f0f0; display: inline-block; border-radius: 50%;"></i><!-- Nuevo icono de usuario -->
@@ -132,7 +166,8 @@
                             ?>
 
                             <?php if ($proyecto->activo == 1): ?>
-                                <?php if ($tipoUsuario != 1): // Usuario común ?>
+                                <?php if ($tipoUsuario != 1): // Usuario común 
+                                ?>
                                     <!--<button class="btn btn-outline-danger">
                                         <i class="bi bi-heart me-2"></i>Favorito
                                     </button>
@@ -141,18 +176,19 @@
                                         class="btn btn-primary">
                                         <i class="bi bi-star me-2"></i>Patrocinar Proyecto
                                     </a>
-                                <?php else: // Super usuario ?>
+                                <?php else: // Super usuario 
+                                ?>
                                     <a href="<?= base_url('proyectos/ventanaDePago/' . $proyecto->id_proyecto) ?>"
                                         class="btn btn-primary">
                                         <i class="bi bi-star me-2"></i>Patrocinar Proyecto
                                     </a>
 
                                     <a href="<?= base_url('proyectos/darBaja/' . $proyecto->id_proyecto) ?>"
-                                        class="btn btn-outline-danger" 
+                                        class="btn btn-outline-danger"
                                         onclick="return confirm('¿Está seguro que desea dar de baja este proyecto?')">
                                         <i class="bi bi-x-circle me-2"></i>Dar de baja Proyecto
                                     </a>
-                                    
+
                                     <!-- Cartel de estado SOLO visible para super usuario -->
                                     <div class="alert alert-success d-flex align-items-center mt-2" role="alert">
                                         <i class="bi bi-check-circle-fill me-2"></i>
@@ -161,20 +197,23 @@
                                         </div>
                                     </div>
                                 <?php endif; ?>
-                            <?php else: // Proyecto inactivo ?>
-                                <?php if ($tipoUsuario != 1): // Usuario común ?>
+                            <?php else: // Proyecto inactivo 
+                            ?>
+                                <?php if ($tipoUsuario != 1): // Usuario común 
+                                ?>
                                     <button class="btn btn-outline-secondary" disabled>
                                         <i class="bi bi-heart me-2"></i>No disponible
                                     </button>
-                                    
+
                                     <button class="btn btn-secondary" disabled>
                                         <i class="bi bi-lock me-2"></i>Patrocinio no disponible
                                     </button>
-                                <?php else: // Super usuario ?>
+                                <?php else: // Super usuario 
+                                ?>
                                     <button class="btn btn-outline-secondary" disabled>
                                         <i class="bi bi-x-circle-fill me-2"></i>Proyecto dado de baja
                                     </button>
-                                    
+
                                     <!-- Cartel de estado SOLO visible para super usuario -->
                                     <div class="alert alert-danger d-flex align-items-center mt-2" role="alert">
                                         <i class="bi bi-exclamation-triangle-fill me-2"></i>
