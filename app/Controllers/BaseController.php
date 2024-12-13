@@ -61,10 +61,37 @@ abstract class BaseController extends Controller
 
     public function layout($page, $data)
     {
-        $notificationModel = new \App\Models\NotificacionModel();
+        $notificacionModel = new \App\Models\NotificacionModel();
         $idUsuario = session()->get('id_usuario');
-        $data['notificaciones_no_leidas'] = $notificationModel->recuperarNotificacionesNoLeidas($idUsuario);
-        $data['notificaciones'] = $notificationModel->where('id_usuario', $idUsuario)->findAll();
+        $data['notificaciones_no_leidas'] = $notificacionModel->recuperarNotificacionesNoLeidas($idUsuario);
+        // $data['notificaciones'] = $notificationModel->where('id_usuario', $idUsuario)->findAll();
+
+        // Cargar las notificaciones del usuario
+
+        $notificaciones = $notificacionModel->where('id_usuario', $idUsuario)->findAll();
+
+        if (!empty($notificaciones)) {
+            // Extraer los IDs de proyecto de las notificaciones
+            $proyecto_ids = array_map(function ($notificacion) {
+                return $notificacion->id_proyecto;
+            }, $notificaciones);
+
+            // Cargar los proyectos correspondientes a esos IDs
+            $proyectoModel = new \App\Models\ProyectoModel();
+            $proyectos = $proyectoModel->whereIn('id_proyecto', $proyecto_ids)->findAll();
+
+            // Asociar detalles de los proyectos a las notificaciones
+            $proyectos_map = [];
+            foreach ($proyectos as $proyecto) {
+                $proyectos_map[$proyecto->id_proyecto] = $proyecto;
+            }
+
+            foreach ($notificaciones as &$notificacion) {
+                $notificacion->proyecto = $proyectos_map[$notificacion->id_proyecto] ?? null;
+            }
+        }
+        $data['notificaciones'] = $notificaciones;
+
         return view('templates/header', $data) .
             view($page, $data) .
             view('templates/footer');

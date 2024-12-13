@@ -14,15 +14,21 @@
                         <div class="fw-bold text-dark">
                             <?= $notificacion->titulo ?>
                         </div>
-                        <small class="text-muted"> <?= $notificacion->descripcion ?> </small>
+                        <small class="text-muted"> <?= $notificacion->mensaje ?> </small>
                         <br>
                         <small class="text-muted fst-italic">
                             Recibido el <?= date('d M Y, H:i', strtotime($notificacion->fecha)) ?>
                         </small>
                         <br>
-                        <a href="<?= base_url('detalleProyecto/' . $notificacion->id_proyecto) ?>" class="text-primary fw-bold">
-                            <?= $notificacion->id_proyecto ?>
-                        </a>
+
+                        <?php if ($notificacion->proyecto): ?>
+                            <a href="<?= base_url('detalleProyecto/' . $notificacion->proyecto->id_proyecto) ?>" class="text-primary fw-bold">
+                                <?= $notificacion->proyecto->nombre ?>
+                            </a>
+                            <p class="mt-2">Estado de avance: <?= $notificacion->proyecto->estado_avance ?>%</p>
+                        <?php else: ?>
+                            <span class="text-danger">Proyecto no encontrado</span>
+                        <?php endif; ?>
                     </div>
                     <?php if (!$notificacion->leida): ?>
                         <span class="badge bg-primary rounded-pill">Nueva</span>
@@ -32,7 +38,3 @@
         </ul>
     <?php endif; ?>
 </div>
-
-<script>
-    // Opcional: Lógica para marcar notificaciones como leídas (AJAX o redirección)
-</script>
