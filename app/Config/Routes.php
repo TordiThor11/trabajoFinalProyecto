@@ -50,4 +50,6 @@ $routes->post('/modificarProyecto/(:num)', 'ProyectosController::proyectoModific
 
 
 $routes->get('/cargarDatosActualizarProyecto/(:num)', 'ProyectosController::cargarDatosActualizacionProyecto/$1'); //actualiar proyecto en view_misProyectos
-$routes->post('/actualizarProyecto/(:num)', 'ProyectosController::actualizarProyecto/$1');//actualiar proyecto en view_misProyectos
+$routes->post('/actualizarProyecto/(:num)', 'ProyectosController::actualizarProyecto/$1'); //actualiar proyecto en view_misProyectos
+
+$routes->get('/notificaciones', 'NotificacionesController::ListarNotificaciones', ['filter' => 'autenticacion']);
