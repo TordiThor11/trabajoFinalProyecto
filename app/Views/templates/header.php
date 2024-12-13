@@ -40,11 +40,6 @@
                     <?php if (session()->get('isLoggedIn')): ?>
 
                         <!-- Sección de Notificaciones -->
-                        <?php
-
-                        $notificaciones_no_leidas;
-
-                        ?>
                         <div class="nav-item dropdown me-3">
                             <a class="nav-link dropdown-toggle text-light position-relative" href="#"
                                 id="notificacionesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

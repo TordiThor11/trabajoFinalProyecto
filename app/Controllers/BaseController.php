@@ -64,7 +64,7 @@ abstract class BaseController extends Controller
         $notificationModel = new \App\Models\NotificacionModel();
         $idUsuario = session()->get('id_usuario');
         $data['notificaciones_no_leidas'] = $notificationModel->recuperarNotificacionesNoLeidas($idUsuario);
-
+        $data['notificaciones'] = $notificationModel->where('id_usuario', $idUsuario)->findAll();
         return view('templates/header', $data) .
             view($page, $data) .
             view('templates/footer');
