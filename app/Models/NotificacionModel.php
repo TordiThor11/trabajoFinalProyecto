@@ -8,7 +8,7 @@ class NotificacionModel extends Model
 {
     protected $table = 'notificaciones';
     protected $primaryKey = 'id_notificacion';
-    protected $allowedFields = ['id_notificacion', 'fecha', 'titulo', 'id_usuario', 'mensaje', 'leido'];
+    protected $allowedFields = ['id_notificacion', 'fecha', 'titulo', 'id_usuario', 'mensaje', 'leido', 'id_proyecto'];
     protected $returnType = NotificacionModel::class;
 
     public function recuperarNotificacionesNoLeidas($idUsuario)

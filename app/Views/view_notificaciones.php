@@ -11,12 +11,18 @@
             <?php foreach ($notificaciones as $notificacion): ?>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold text-dark"> <?= $notificacion->titulo ?> </div>
+                        <div class="fw-bold text-dark">
+                            <?= $notificacion->titulo ?>
+                        </div>
                         <small class="text-muted"> <?= $notificacion->descripcion ?> </small>
                         <br>
                         <small class="text-muted fst-italic">
                             Recibido el <?= date('d M Y, H:i', strtotime($notificacion->fecha)) ?>
                         </small>
+                        <br>
+                        <a href="<?= base_url('detalleProyecto/' . $notificacion->id_proyecto) ?>" class="text-primary fw-bold">
+                            <?= $notificacion->id_proyecto ?>
+                        </a>
                     </div>
                     <?php if (!$notificacion->leida): ?>
                         <span class="badge bg-primary rounded-pill">Nueva</span>

@@ -61,7 +61,7 @@
                                     <?php foreach ($notificaciones as $notificacion): ?>
                                         <li>
                                             <a class="dropdown-item <?= $notificacion->leida ? '' : 'fw-bold' ?>"
-                                                href="<?= base_url('/proyectos/' . $notificacion->proyecto_id) ?>">
+                                                href="<?= base_url('/detalleProyecto/' . $notificacion->id_proyecto) ?>">
                                                 <?= htmlspecialchars($notificacion->mensaje) ?>
                                                 <small class="text-muted d-block"><?= date('d M Y H:i', strtotime($notificacion->fecha_creacion)) ?></small>
                                             </a>
