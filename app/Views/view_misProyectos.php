@@ -19,11 +19,11 @@
                         </div>
                         <div>
 
-                            
+
 
                             <?php if ($proyecto->activo == 2): ?>
                                 Borrador
-                                
+
                                 <a href="<?= base_url() ?>preModificarProyecto/<?= $proyecto->id_proyecto; ?>"
                                     class="btn btn-primary btn-sm">
                                     <i class="fas fa-eye me-1"></i>
@@ -35,6 +35,14 @@
                                     <i class="fas fa-eye me-1"></i>
                                     Publicar
                                 </a>
+
+                                <!--actualizar proyecto -->
+                                <a href="<?= base_url() ?>cargarDatosActualizarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm disabled" disabled>
+                                    <i class="fas fa-eye me-1"></i>
+                                    Actualizar
+                                </a>
+
                             <?php else: ?>
                                 Publicado
 
@@ -49,6 +57,13 @@
                                     <i class="fas fa-eye me-1"></i>
                                     Publicar
                                 </a>
+
+                                <!--actualizar proyecto -->
+                                <a href="<?= base_url() ?>cargarDatosActualizarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Actualizar
+                                </a>
                             <?php endif; ?>
 
                             <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>"
@@ -57,12 +72,7 @@
                                 Ver Proyecto
                             </a>
 
-                             <!--actualizar proyecto -->
-                             <a href="<?= base_url() ?>cargarDatosActualizarProyecto/<?= $proyecto->id_proyecto; ?>"
-                                class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye me-1"></i>
-                                Actualizar
-                            </a>
+
 
                         </div>
                     </li>
