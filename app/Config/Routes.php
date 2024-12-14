@@ -48,3 +48,4 @@ $routes->get('/preModificarProyecto/(:num)', 'ProyectosController::buscarProyect
 
 $routes->post('/modificarProyecto/(:num)', 'ProyectosController::proyectoModificar/$1');
 
+$routes->get('/publicarProyecto/(:num)', 'ProyectosController::publicarProyecto/$1');
