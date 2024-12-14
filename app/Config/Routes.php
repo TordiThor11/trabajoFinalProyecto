@@ -53,3 +53,4 @@ $routes->get('/cargarDatosActualizarProyecto/(:num)', 'ProyectosController::carg
 $routes->post('/actualizarProyecto/(:num)', 'ProyectosController::actualizarProyecto/$1'); //actualiar proyecto en view_misProyectos
 
 $routes->get('/notificaciones', 'NotificacionesController::ListarNotificaciones', ['filter' => 'autenticacion']);
+$routes->get('/publicarProyecto/(:num)', 'ProyectosController::publicarProyecto/$1');

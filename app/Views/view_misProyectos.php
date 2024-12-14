@@ -18,28 +18,52 @@
                             <span class="fw-medium"><?= htmlspecialchars($proyecto->nombre) ?></span>
                         </div>
                         <div>
-                            <!--modificar proyecto-->
-                            <a href="<?= base_url() ?>preModificarProyecto/<?= $proyecto->id_proyecto; ?>"
-                                class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye me-1"></i>
-                                Modificar
-                            </a>
 
+                            
 
-                            <!--actualizar proyecto -->
-                            <a href="<?= base_url() ?>cargarDatosActualizarProyecto/<?= $proyecto->id_proyecto; ?>"
-                                class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye me-1"></i>
-                                Actualizar
-                            </a>
+                            <?php if ($proyecto->activo == 2): ?>
+                                Borrador
+                                
+                                <a href="<?= base_url() ?>preModificarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Modificar
+                                </a>
 
+                                <a href="<?= base_url() ?>publicarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Publicar
+                                </a>
+                            <?php else: ?>
+                                Publicado
 
-                            <!--ver detalle proyecto-->
+                                <a href="<?= base_url() ?>preModificarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm disabled" disabled>
+                                    <i class="fas fa-eye me-1"></i>
+                                    Modificar
+                                </a>
+
+                                <a href="<?= base_url() ?>publicarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm disabled" disabled>
+                                    <i class="fas fa-eye me-1"></i>
+                                    Publicar
+                                </a>
+                            <?php endif; ?>
+
                             <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>"
                                 class="btn btn-primary btn-sm">
                                 <i class="fas fa-eye me-1"></i>
                                 Ver Proyecto
                             </a>
+
+                             <!--actualizar proyecto -->
+                             <a href="<?= base_url() ?>cargarDatosActualizarProyecto/<?= $proyecto->id_proyecto; ?>"
+                                class="btn btn-primary btn-sm">
+                                <i class="fas fa-eye me-1"></i>
+                                Actualizar
+                            </a>
+
                         </div>
                     </li>
                 <?php endforeach; ?>

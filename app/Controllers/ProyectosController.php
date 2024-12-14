@@ -48,7 +48,7 @@ class ProyectosController extends BaseController
 
 
         //Unimos los arreglos
-        $data = array_merge($data, $formData, ['activo' => 1]); //unimos los arreglos 
+        $data = array_merge($data, $formData, ['activo' => 2]); //unimos los arreglos 
 
         //Guardo los datos en la db
         $proyectoModel = new ProyectoModel();
@@ -175,7 +175,8 @@ class ProyectosController extends BaseController
 
     public function ventanaDePago($idProyecto)
     {
-        $data = array('id_proyecto' => $idProyecto);; //recibo el id pasado via get/parametros y lo envio al formulario de pago
+        $data = array('id_proyecto' => $idProyecto);
+        ; //recibo el id pasado via get/parametros y lo envio al formulario de pago
         return $this->layout('view_patrocinar_proyecto', $data);
     }
 
@@ -203,14 +204,28 @@ class ProyectosController extends BaseController
 
     public function proyectoModificar($idProyecto)
     {
-        $db = db_connect();
-        #Obtengo los datos usando el model
+        // Validar que se reciban los datos del formulario
+        $proyectoMod = $this->request->getPost();
+        // Usar el modelo para actualizar en lugar de consulta SQL directa
+        $proyectoModel = new ProyectoModel(); // Asume que tienes un modelo definido
+        
+        ['id_proyecto', 'nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'activo',
+         'objetivo', 'presupuesto_requerido', 'id_usuario_creador', 'id_usuario_creador', 'imagen_principal'];
+        
+         $datosActualizar = [
+            'nombre' => $proyectoMod['proyectoNombre'],
+            'plan_recompensas' => $proyectoMod['planRecompensas'],
+            'fecha_limite' => $proyectoMod['proyectoFecha'],
+            'detalle' => $proyectoMod['proyectoDetalle'],
+            'impacto_esperado' => $proyectoMod['impactoEsperado'],
+            'objetivo' => $proyectoMod['objetivo'],
+            'presupuesto_requerido' => $proyectoMod['presupuestoRequerido']
+        ];
 
-        $detalle = $this->request->getPost(['proyectoDetalle']);
+        // Usar el método update del modelo
+        $proyectoModel->update($idProyecto, $datosActualizar);
 
-        $sql = 'UPDATE `proyectos` SET `detalle` = ? WHERE `proyectos`.`id_proyecto` = ?;';
-        $query = $db->query($sql, [$detalle, $idProyecto]);
-
+        // Redirigir después de la actualización
         return redirect()->to(base_url('/detalleProyecto/' . $idProyecto));
     }
     public function cargarDatosActualizacionProyecto($idProyecto)
@@ -242,4 +257,15 @@ class ProyectosController extends BaseController
         $version = $model->save($data);
         return redirect()->to(base_url('/'));
     }
+
+    public function publicarProyecto($idProyecto)
+    {
+        $db = db_connect();
+
+        $sql = 'UPDATE `proyectos` SET `activo` = 1 WHERE `proyectos`.`id_proyecto` = ?;';
+        $query = $db->query($sql, [$idProyecto]); // Usa un array para pasar el valor del marcador de posición
+
+        return redirect()->to(base_url('/misProyectos/'));
+    }
 }
+
