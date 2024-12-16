@@ -42,4 +42,11 @@ class UsuarioPatrocinaProyectoModel extends Model #USA CLAVE "FICTICIA"
             'fecha' => $fecha
         ])->first();
     }
+    public function getUsuariosPatrocinios($idProyecto)
+    {
+        return $this->select('id_usuario')
+            ->where('id_proyecto', $idProyecto)
+            ->distinct() // Garantiza que no haya repetidos
+            ->findAll();
+    }
 }

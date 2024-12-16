@@ -14,19 +14,18 @@
             <h1 class="display-5 fw-bold mb-0"><?= $proyecto->nombre ?></h1>
         </div>
 
-        <!-- Contenido Principal - División en Columnas -->
+        <!-- Contenido Principal -->
         <div class="row g-4">
-            <!-- Columna Principal - Información Detallada -->
+            <!-- Columna Principal -->
             <div class="col-lg-8">
-                <!-- Imagen Principal del Proyecto -->
+                <!-- Imagen Principal -->
                 <img src="<?= base_url('uploads/proyectos/' . $proyecto->imagen_principal) ?>"
                     class="d-block w-100 img-fluid"
                     alt="Imagen del Proyecto"
                     style="object-fit: cover; height: 800px;">
 
-                <!-- Sección de Pestañas de Información -->
-                <div class="card border-0 shadow-sm">
-                    <!-- Encabezado de Pestañas -->
+                <!-- Pestañas de Información -->
+                <div class="card border-0 shadow-sm mt-4">
                     <div class="card-header bg-white">
                         <ul class="nav nav-tabs card-header-tabs" role="tablist">
                             <li class="nav-item">
@@ -107,36 +106,60 @@
                     <?php endif; ?>
                 </div>
 
+
             </div>
 
-            <!-- Columna Lateral - Información del Proyecto -->
+            <!-- Columna Lateral -->
             <div class="col-lg-4">
                 <!-- Tarjeta del Autor -->
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-body">
-                        <!-- Información del Autor -->
-
+                        <!-- Autor del Proyecto -->
                         <div class="d-flex align-items-center mb-4">
-                            <!--<img src="https://via.placeholder.com/60x60" class="rounded-circle me-3" alt="Author avatar">-->
-                            <i class="bi bi-person-circle me-3" style="font-size: 60px; width: 60px; height: 60px; line-height: 60px; text-align: center; background-color: #f0f0f0; display: inline-block; border-radius: 50%;"></i><!-- Nuevo icono de usuario -->
+                            <i class="bi bi-person-circle me-3" style="font-size: 60px;"></i>
                             <div>
                                 <h5 class="fw-bold mb-0"><?= $mail_usuario ?? 'Nombre del Autor' ?></h5>
                                 <small class="text-muted">Publicado: <?= date('d M Y') ?></small>
                             </div>
                         </div>
 
-                        <!-- Barra de Progreso de Recaudación -->
-                        <div class="progress mb-3" style="height: 10px;">
-                            <?php
-                            // Calcular porcentaje de recaudación con límite de 3 decimales
-                            $porcentaje = ($proyecto->montoTotal / $proyecto->presupuesto_requerido) * 100;
-                            $porcentaje = min($porcentaje, 100);
-                            $porcentaje = number_format($porcentaje, 3);
-                            ?>
-                            <div class="progress-bar bg-success" style="width: <?= $porcentaje ?>%"></div>
+                        <!-- Progreso del Proyecto -->
+                        <h6 class="fw-bold text-muted">Avance del Proyecto</h6>
+                        <?php
+                        $avance_total = number_format($proyecto->avance_total, 0);
+                        $avance_financiero = ($proyecto->montoTotal / $proyecto->presupuesto_requerido) * 100;
+                        $avance_financiero = min($avance_financiero, 100);
+                        $avance_financiero = number_format($avance_financiero, 2);
+                        ?>
+                        <!-- Barra de Avance del Proyecto -->
+                        <div class="mb-3">
+                            <div class="progress" style="height: 15px;">
+                                <div class="progress-bar bg-info" role="progressbar"
+                                    style="width: <?= $avance_total ?>%;"
+                                    aria-valuenow="<?= $avance_total ?>"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <?= $avance_total ?>%
+                                </div>
+                            </div>
+                            <small class="text-muted">Avance Total del Proyecto</small>
                         </div>
 
-                        <!-- Métricas de Recaudación -->
+                        <!-- Barra de Progreso Financiero -->
+                        <div class="mb-3">
+                            <div class="progress" style="height: 15px;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                    style="width: <?= $avance_financiero ?>%;"
+                                    aria-valuenow="<?= $avance_financiero ?>"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <?= $avance_financiero ?>%
+                                </div>
+                            </div>
+                            <small class="text-muted">Progreso de Financiamiento</small>
+                        </div>
+
+                        <!-- Métricas -->
                         <div class="d-flex justify-content-between mb-4">
                             <div class="text-center">
                                 <h5 class="fw-bold mb-0">$<?= number_format($proyecto->montoTotal, 0, '.', ',') ?></h5>
@@ -145,10 +168,6 @@
                             <div class="text-center">
                                 <h5 class="fw-bold mb-0">$<?= number_format($proyecto->presupuesto_requerido, 0, '.', ',') ?></h5>
                                 <small class="text-muted">Meta</small>
-                            </div>
-                            <div class="text-center">
-                                <h5 class="fw-bold mb-0"><?= $porcentaje ?>%</h5>
-                                <small class="text-muted">Completado</small>
                             </div>
                         </div>
 

@@ -42,15 +42,18 @@ class NotificacionesController extends BaseController
     }
 
 
-    //Antes:
-    /*public function ListarNotificaciones()
+    public function marcarTodasLeidas()
     {
         $session = session();
         $id_usuario = $session->get('id_usuario');
 
-        $model = new NotificacionModel();
-        $data['notificaciones'] = $model->where('id_usuario', $id_usuario)->findAll();
+        // Carga el modelo
+        $notificacionModel = new \App\Models\NotificacionModel();
 
-        return $this->layout('view_notificaciones.php', $data);
-    }*/
+        // Actualiza todas las notificaciones que aún no estén marcadas como leídas
+        $notificacionModel->marcarTodoLeido($id_usuario);
+
+        // Devuelve una respuesta JSON
+        return $this->response->setJSON(['status' => 'success', 'message' => 'Notificaciones actualizadas']);
+    }
 }

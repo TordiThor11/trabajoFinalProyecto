@@ -8,7 +8,7 @@ class VersionModel extends Model
 {
     protected $table = 'versiones';
     protected $primaryKey = 'id_version';
-    protected $allowedFields = ['id_version', 'nombre', 'id_proyecto', 'descripcion', 'fecha'];
+    protected $allowedFields = ['id_version', 'nombre', 'id_proyecto', 'descripcion', 'fecha', 'avance_agregado'];
     protected $returnType = VersionModel::class;
 
     public function obtenerActualizaciones($idProyecto) //no se usa, se remplazo por findall dado por codeigniter

@@ -26,6 +26,11 @@
                             <textarea class="form-control" id="actualizacionDetalle" name="actualizacionDetalle" rows="3"></textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="avanceAgregado">Avance agregado en la actualizacion (en porcentaje)</label>
+                            <input type="number" class="form-control" id="avanceAgregado" name="avanceAgregado"></textarea>
+                        </div>
+
                         <div>
                             <a href="<?= base_url() ?>" class="btn btn-danger">
                                 Cancelar

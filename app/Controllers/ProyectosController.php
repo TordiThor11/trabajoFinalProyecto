@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use App\Models\UsuarioPatrocinaProyectoModel;
 use App\Models\VersionModel;
 use CodeIgniter\Database\Database;
+use App\Models\NotificacionModel;
 
 class ProyectosController extends BaseController
 {
@@ -175,8 +176,7 @@ class ProyectosController extends BaseController
 
     public function ventanaDePago($idProyecto)
     {
-        $data = array('id_proyecto' => $idProyecto);
-        ; //recibo el id pasado via get/parametros y lo envio al formulario de pago
+        $data = array('id_proyecto' => $idProyecto);; //recibo el id pasado via get/parametros y lo envio al formulario de pago
         return $this->layout('view_patrocinar_proyecto', $data);
     }
 
@@ -208,11 +208,23 @@ class ProyectosController extends BaseController
         $proyectoMod = $this->request->getPost();
         // Usar el modelo para actualizar en lugar de consulta SQL directa
         $proyectoModel = new ProyectoModel(); // Asume que tienes un modelo definido
-        
-        ['id_proyecto', 'nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'activo',
-         'objetivo', 'presupuesto_requerido', 'id_usuario_creador', 'id_usuario_creador', 'imagen_principal'];
-        
-         $datosActualizar = [
+
+        [
+            'id_proyecto',
+            'nombre',
+            'plan_recompensas',
+            'fecha_limite',
+            'detalle',
+            'impacto_esperado',
+            'activo',
+            'objetivo',
+            'presupuesto_requerido',
+            'id_usuario_creador',
+            'id_usuario_creador',
+            'imagen_principal'
+        ];
+
+        $datosActualizar = [
             'nombre' => $proyectoMod['proyectoNombre'],
             'plan_recompensas' => $proyectoMod['planRecompensas'],
             'fecha_limite' => $proyectoMod['proyectoFecha'],
@@ -245,16 +257,36 @@ class ProyectosController extends BaseController
 
         $db = db_connect();
         #creo el objeto version del proyecto
-        $model = new VersionModel();
+        $versionModel = new VersionModel();
 
         //Obtengo los datos del formulario
-        $formData = $this->request->getPost(['actualizacionNombre', 'actualizacionDetalle']);
+        $formData = $this->request->getPost(['actualizacionNombre', 'actualizacionDetalle', 'avanceAgregado']);
 
         // Combino los arreglos y añado la fecha actual
-        $data = array('id_proyecto' => $idProyecto, 'nombre' => $formData['actualizacionNombre'], 'descripcion' => $formData['actualizacionDetalle'], 'fecha' => date('Y-m-d H:i:s')); // Formato compatible con datetime
+        $data = array('id_proyecto' => $idProyecto, 'nombre' => $formData['actualizacionNombre'], 'descripcion' => $formData['actualizacionDetalle'], 'fecha' => date('Y-m-d H:i:s'), 'avance_agregado' => $formData['avanceAgregado']); // Formato compatible con datetime
 
         // dd($data);
-        $version = $model->save($data);
+        $versionModel = $versionModel->save($data);
+
+        $proyectoModel = new ProyectoModel();
+        $proyectoModel->agregarAvance($idProyecto, $formData['avanceAgregado']);
+
+        //lo siguiente es la logica para crear notificaciones a los usuarios que patrocinaron el proyecto
+        $usuarioPatrocinaModel = new UsuarioPatrocinaProyectoModel();
+        $idInversores = $usuarioPatrocinaModel->getUsuariosPatrocinios($idProyecto);
+
+        foreach ($idInversores as $idInversor) {
+            $notificacionModel = new NotificacionModel();
+
+            $notificacionModel->save([
+                'id_proyecto' => $idProyecto,
+                'id_usuario' => $idInversor->id_usuario,
+                'leido' => '1', //se marca como leido por ahora, no deberia ser asi en un caso real. Esto es para probar el sistema de notificaciones
+                'fecha' => date('Y-m-d H:i:s'),
+                'titulo' => 'Nueva actualizacion: ' . $formData['actualizacionNombre'],
+                'mensaje' => 'El proyecto ' . $proyectoModel->find($idProyecto)->nombre . ' a lanzado una nueva actualizacion!'
+            ]);
+        }
         return redirect()->to(base_url('/'));
     }
 
@@ -268,4 +300,3 @@ class ProyectosController extends BaseController
         return redirect()->to(base_url('/misProyectos/'));
     }
 }
-
