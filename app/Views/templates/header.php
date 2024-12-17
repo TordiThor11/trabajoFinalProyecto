@@ -45,17 +45,22 @@
                                 id="notificacionesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <!-- Ícono de campana para las notificaciones -->
                                 <i class="bi bi-bell fs-4"></i>
-                                <?php if (count($notificaciones_no_leidas) > 0): ?>
+
+                                <!-- Contador de notificaciones no leídas, se saco esa funcion -->
+                                <?php /*if (count($notificaciones_no_leidas) > 0): ?>
                                     <!-- Badge para el contador de notificaciones no leídas -->
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                         <?= count($notificaciones_no_leidas) ?>
                                     </span>
-                                <?php endif; ?>
+                                <?php endif; */ ?>
+                                <!-- FIN Contador-->
+
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificacionesDropdown">
                                 <?php if (empty($notificaciones)): ?>
                                     <!-- Mensaje cuando no hay notificaciones -->
                                     <li class="dropdown-item text-muted">No tienes notificaciones</li>
+                                    <li><a class="dropdown-item text-center" href="<?= base_url('/notificaciones') ?>">Ver todas las notificaciones</a></li>
                                 <?php else: ?>
                                     <!-- Mostrar lista de notificaciones -->
                                     <?php foreach ($notificaciones as $notificacion): ?>
