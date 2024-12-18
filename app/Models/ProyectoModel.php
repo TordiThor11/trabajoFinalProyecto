@@ -15,21 +15,19 @@ class ProyectoModel extends Model
 
     public function agregarAvance($idProyecto, $avanceAgregado)
     {
-        // Encuentra el proyecto por su ID
+        // Obtengo el avance actual del proyecto
         $proyecto = $this->find($idProyecto);
+        $avanceActual = $proyecto->avance_total;
 
-        // Verifica si el proyecto existe
-        if (!$proyecto) {
-            throw new \Exception("El proyecto no existe.");
+        // Calculo el nuevo avance
+        $nuevoAvance = $avanceActual + $avanceAgregado;
+
+        // Si el nuevo avance supera 100, lo limito a 100
+        if ($nuevoAvance > 100) {
+            $nuevoAvance = 100;
         }
 
-        // Convierte el objeto en un array para usarlo en el método update
-        $proyectoArray = (array) $proyecto;
-
-        // Calcula el nuevo avance
-        $nuevoAvance = $proyectoArray['avance_total'] + $avanceAgregado;
-
-        // Actualiza solo el campo 'avance_total'
+        // Actualizo el avance total del proyecto
         $this->update($idProyecto, ['avance_total' => $nuevoAvance]);
     }
 }

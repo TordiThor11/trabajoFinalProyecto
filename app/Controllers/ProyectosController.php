@@ -253,7 +253,7 @@ class ProyectosController extends BaseController
 
     public function actualizarProyecto($idProyecto) //deberia validar que exista nombre en backend
     {
-        // helper('date'); // Helper de fechas, se usa en: 'now()'
+        //Si la suma del avance actual y el agregado es mayor a 100, lo limito a 100. La logica esta en proyectoModel
 
         $db = db_connect();
         #creo el objeto version del proyecto
@@ -269,7 +269,7 @@ class ProyectosController extends BaseController
         $versionModel = $versionModel->save($data);
 
         $proyectoModel = new ProyectoModel();
-        $proyectoModel->agregarAvance($idProyecto, $formData['avanceAgregado']);
+        $proyectoModel->agregarAvance($idProyecto, $formData['avanceAgregado']); //Si la suma del avance actual y el agregado es mayor a 100, lo limito a 100. La logica esta en proyectoModel
 
         //lo siguiente es la logica para crear notificaciones a los usuarios que patrocinaron el proyecto
         $usuarioPatrocinaModel = new UsuarioPatrocinaProyectoModel();

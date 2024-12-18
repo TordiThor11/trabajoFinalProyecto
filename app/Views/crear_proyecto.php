@@ -83,8 +83,8 @@
                                 <div class="mb-3">
                                     <label for="avance_inicial" class="form-label">Avance Inicial (%)</label>
                                     <input type="number" class="form-control" id="avance_total" name="avance_total"
-                                        placeholder="Ej: 0" min="0" max="100" required>
-                                    <div class="form-text">Introduce un porcentaje entre 0 y 100.</div>
+                                        placeholder="Ej: 25" min="0" max="99" required>
+                                    <div class="form-text">Introduce un porcentaje entre 0 y 99.</div>
                                 </div>
                             </div>
 
