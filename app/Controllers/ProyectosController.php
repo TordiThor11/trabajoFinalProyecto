@@ -231,7 +231,8 @@ class ProyectosController extends BaseController
             'detalle' => $proyectoMod['proyectoDetalle'],
             'impacto_esperado' => $proyectoMod['impactoEsperado'],
             'objetivo' => $proyectoMod['objetivo'],
-            'presupuesto_requerido' => $proyectoMod['presupuestoRequerido']
+            'presupuesto_requerido' => $proyectoMod['presupuestoRequerido'],
+            'avance_total' => $proyectoMod['avance_total']
         ];
 
         // Usar el método update del modelo

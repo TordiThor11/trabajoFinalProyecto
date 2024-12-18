@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             <label for="proyectoFecha" class="form-label">Fecha Límite</label>
-                            <input type="date" class="form-control" id="proyectoFecha" name="proyectoFecha" value="<?php echo htmlspecialchars($proyecto->fecha_limite); ?>"required>
+                            <input type="date" class="form-control" id="proyectoFecha" name="proyectoFecha" value="<?php echo htmlspecialchars($proyecto->fecha_limite); ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="proyectoFecha">Presupuesto Requerido</label>
@@ -43,6 +43,16 @@
                             <textarea class="form-control" id="planRecompensas" name="planRecompensas"
                                 rows="3"><?= $proyecto->plan_recompensas; ?></textarea>
                         </div>
+
+                        <!-- Nuevo campo: Avance inicial -->
+                        <div class="form-group">
+                            <label for="avance_total">Avance Inicial (%)</label>
+                            <input type="number" class="form-control" id="avance_total" name="avance_total"
+                                value="<?= htmlspecialchars($proyecto->avance_total ?? 0); ?>"
+                                min="0" max="99" step="1" required>
+                            <small class="form-text text-muted">El avance inicial debe estar entre 0 y 99.</small>
+                        </div>
+
                         <div>
                             <a href="<?= base_url() ?>" class="btn btn-danger">
                                 Cancelar
