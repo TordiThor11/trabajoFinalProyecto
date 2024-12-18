@@ -21,11 +21,28 @@
                             </span>
                         </div>
                         <div>
-                            <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>" 
-                               class="btn btn-primary btn-sm">
+                            <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>"
+                                class="btn btn-primary btn-sm">
                                 <i class="fas fa-eye me-1"></i>
                                 Ver Proyecto
                             </a>
+                        </div>
+                    </div>
+                    <!-- Barra de progreso -->
+
+                    <div class="mt-3">
+                        <div class="d-flex align-items-center">
+                            <div class="progress" style="width: 70%; height: 15px; border-radius: 10px; background-color: #e9ecef;">
+                                <div class="progress-bar bg-success" role="progressbar"
+                                    style="width: <?= htmlspecialchars($proyecto->avance_total) ?>%; border-radius: 10px;"
+                                    aria-valuenow="<?= htmlspecialchars($proyecto->avance_total) ?>"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+                                </div>
+                            </div>
+                            <span class="ms-3 text-muted">
+                                <?= htmlspecialchars($proyecto->avance_total) ?>%
+                            </span>
                         </div>
                     </div>
                 <?php endforeach; ?>
