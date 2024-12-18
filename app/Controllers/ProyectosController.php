@@ -26,7 +26,7 @@ class ProyectosController extends BaseController
         $data = ['id_usuario_creador' => $id_usuario_creador];
 
         //Obtengo los datos del formulario
-        $formData = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'estado', 'objetivo', 'presupuesto_requerido']);
+        $formData = $this->request->getPost(['nombre', 'plan_recompensas', 'fecha_limite', 'detalle', 'impacto_esperado', 'estado', 'objetivo', 'presupuesto_requerido', 'avance_total']);
 
 
 
