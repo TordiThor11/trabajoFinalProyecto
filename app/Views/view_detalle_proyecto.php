@@ -123,6 +123,33 @@
                             </div>
                         </div>
 
+                        <!-- Valoración del Usuario -->
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-muted">Valoración del usuario</h6>
+                            <div class="d-flex align-items-center">
+                                <?php if (isset($promedioPuntuacion)): ?>
+                                    <!-- Mostrar la puntuación promedio -->
+                                    <div class="d-flex align-items-center">
+                                        <span class="fs-4 me-2">
+                                            <?php
+                                            // Mostrar la puntuación con estrellas
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                if ($i <= round($promedioPuntuacion)) {
+                                                    echo '<i class="bi bi-star-fill text-warning"></i>'; // Estrella llena
+                                                } else {
+                                                    echo '<i class="bi bi-star text-muted"></i>'; // Estrella vacía
+                                                }
+                                            }
+                                            ?>
+                                        </span>
+                                        <small class="text-muted">(Promedio: <?= number_format($promedioPuntuacion, 1) ?>)</small>
+                                    </div>
+                                <?php else: ?>
+                                    <p class="text-muted">No hay valoraciones aún.</p>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
                         <!-- Progreso del Proyecto -->
                         <h6 class="fw-bold text-muted">Avance del Proyecto</h6>
                         <?php
@@ -176,6 +203,9 @@
                             <i class="bi bi-calendar-event me-2"></i>
                             Fecha límite: <?= date('d M Y', strtotime($proyecto->fecha_limite)) ?>
                         </div>
+
+
+
 
                         <!-- Botones de Acción -->
                         <div class="d-grid gap-2">

@@ -85,9 +85,11 @@ class ProyectosController extends BaseController
         $versionModel = new VersionModel();
         $versiones = $versionModel->where('id_proyecto', $id)->findAll();
 
+        //promedio de puntuacion de usuario
+        $promedioPuntuacion = $userModel->obtenerPromedioPuntuacion($proyecto->id_usuario_creador);
 
         //Creo el array con 'mail_usuario' y 'proyecto'.
-        $data = array('mail_usuario' => $usuario['mail'], 'proyecto' => $proyecto, 'versiones' => $versiones);
+        $data = array('mail_usuario' => $usuario['mail'], 'proyecto' => $proyecto, 'versiones' => $versiones, 'promedioPuntuacion' => $promedioPuntuacion);
 
         return $this->layout('view_detalle_proyecto', $data);
     }

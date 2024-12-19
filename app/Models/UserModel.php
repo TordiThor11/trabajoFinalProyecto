@@ -31,10 +31,9 @@ class UserModel extends Model
     {
         $db = db_connect();
         $query = $db->query("
-        SELECT AVG(p.puntuacion) AS promedio
-        FROM proyecto_puntuacion p
-        JOIN proyectos pr ON p.id_proyecto = pr.id_proyecto
-        WHERE pr.id_usuario = ?
+        SELECT AVG(puntuacion) AS promedio
+        FROM proyecto_puntuacion
+        WHERE id_usuario = ?;
     ", [$idUsuario]);
 
         $resultado = $query->getRow();
