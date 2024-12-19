@@ -12,37 +12,58 @@
             </div>
             <div class="card-body p-0">
                 <?php foreach ($proyectos as $proyecto): ?>
-                    <div class="item d-flex justify-content-between align-items-center p-3 border-bottom">
-                        <div>
-                            <i class="fas fa-hand-holding-usd me-2"></i>
-                            <span class="fw-medium"><?= htmlspecialchars($proyecto->nombre) ?></span>
-                            <span class="ms-2 text-muted">
-                                -- Monto Invertido: $<?= number_format($proyecto->monto, 2) ?>
-                            </span>
-                        </div>
-                        <div>
-                            <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>"
-                                class="btn btn-primary btn-sm">
-                                <i class="fas fa-eye me-1"></i>
-                                Ver Proyecto
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Barra de progreso -->
-
-                    <div class="mt-3">
-                        <div class="d-flex align-items-center">
-                            <div class="progress" style="width: 70%; height: 15px; border-radius: 10px; background-color: #e9ecef;">
-                                <div class="progress-bar bg-success" role="progressbar"
-                                    style="width: <?= htmlspecialchars($proyecto->avance_total) ?>%; border-radius: 10px;"
-                                    aria-valuenow="<?= htmlspecialchars($proyecto->avance_total) ?>"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100">
-                                </div>
+                    <div class="item p-3 border-bottom">
+                        <!-- Nombre y Monto Invertido -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fas fa-hand-holding-usd me-2"></i>
+                                <span class="fw-medium"><?= htmlspecialchars($proyecto->nombre_proyecto) ?></span>
+                                <span class="ms-2 text-muted">
+                                    -- Monto Invertido: $<?= number_format($proyecto->monto_total, 2) ?>
+                                </span>
                             </div>
-                            <span class="ms-3 text-muted">
-                                <?= htmlspecialchars($proyecto->avance_total) ?>%
-                            </span>
+                            <div>
+                                <a href="<?= base_url() ?>detalleProyecto/<?= $proyecto->id_proyecto; ?>"
+                                    class="btn btn-primary btn-sm">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Ver Proyecto
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Barra de Progreso y Valoración -->
+                        <div class="d-flex align-items-center mt-3">
+                            <!-- Mitad izquierda: Barra de progreso -->
+                            <div class="w-50">
+                                <div class="progress" style="height: 10px;">
+                                    <div class="progress-bar" role="progressbar"
+                                        style="width: <?= $proyecto->avance_total ?>%;"
+                                        aria-valuenow="<?= $proyecto->avance_total ?>"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                </div>
+                                <p class="text-center mt-1 mb-0">
+                                    Avance: <?= $proyecto->avance_total ?>%
+                                </p>
+                            </div>
+                            <!-- Mitad derecha: Valoración -->
+                            <div class="w-50 d-flex justify-content-end">
+                                <form action="<?= base_url('guardarPuntuacion') ?>" method="POST" class="d-flex align-items-center">
+                                    <input type="hidden" name="id_proyecto" value="<?= $proyecto->id_proyecto ?>">
+                                    <label for="puntuacion-<?= $proyecto->id_proyecto ?>" class="me-2 mb-0">Valorar:</label>
+                                    <select name="puntuacion" id="puntuacion"
+                                        class="form-select form-select-sm w-auto me-2">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        <i class="fas fa-star"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

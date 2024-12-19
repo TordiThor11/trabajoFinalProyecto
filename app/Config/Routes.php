@@ -55,4 +55,6 @@ $routes->post('/actualizarProyecto/(:num)', 'ProyectosController::actualizarProy
 $routes->get('/notificaciones', 'NotificacionesController::ListarNotificaciones', ['filter' => 'autenticacion']);
 $routes->get('/publicarProyecto/(:num)', 'ProyectosController::publicarProyecto/$1');
 
-$routes->post('notificaciones/marcarTodasLeidas', 'NotificacionesController::marcarTodasLeidas');//NO se implemento el leido al final. 
+$routes->post('notificaciones/marcarTodasLeidas', 'NotificacionesController::marcarTodasLeidas'); //NO se implemento el leido al final. 
+
+$routes->post('guardarPuntuacion', 'PuntuacionesController::guardarPuntuacion');

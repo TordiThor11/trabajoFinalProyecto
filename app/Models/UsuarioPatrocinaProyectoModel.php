@@ -49,4 +49,31 @@ class UsuarioPatrocinaProyectoModel extends Model #USA CLAVE "FICTICIA"
             ->distinct() // Garantiza que no haya repetidos
             ->findAll();
     }
+
+    public function obtenerPatrociniosAgrupadosPorUsuario($idUsuario)
+    {
+        // Consulta SQL para obtener los patrocinios agrupados
+        $sql = 'SELECT 
+                p.id_proyecto,
+                pr.avance_total, 
+                pr.nombre AS nombre_proyecto, 
+                SUM(p.monto) AS monto_total, 
+                COALESCE(v.puntuacion, 0) AS puntuacion
+            FROM 
+                usuario_patrocina_proyecto p
+            JOIN 
+                proyectos pr ON p.id_proyecto = pr.id_proyecto
+            LEFT JOIN 
+                proyecto_puntuacion v ON p.id_proyecto = v.id_proyecto AND p.id_usuario = v.id_usuario
+            WHERE 
+                p.id_usuario = ?
+            GROUP BY 
+                p.id_proyecto';
+
+        // Ejecutamos la consulta pasando el idUsuario como parámetro
+        $query = $this->db->query($sql, [$idUsuario]);
+
+        // Devolvemos el resultado de la consulta
+        return $query->getResult();
+    }
 }

@@ -119,23 +119,8 @@ class ProyectosController extends BaseController
     }
 
     public function misPatrocinios()
+    #Antes de la agrupacion
     /*{
-        $proyectos = new ProyectoModel();
-
-        //obtengo el id del usuario
-        $session = session();
-        $idUsuario = $session->get('id_usuario');
-
-        //Creo el modelo y llamo a la funcion para recuperar los patrocinios (esta creada dentro del model)
-        $usuarioPatrocinaModel = new UsuarioPatrocinaProyectoModel();
-        $proyectos = $usuarioPatrocinaModel->obtenerProyectosConMontoPorUsuario($idUsuario);
-
-        // Pasamos los datos a la vista
-        return $this->layout('view_misPatrocinios', ['proyectos' => $proyectos]);
-    }*/
-
-    #Antes del refactoring misPatrocinios:  Antes del refactoring misPatrocinios:  Antes del refactoring misPatrocinios:  Antes del refactoring misPatrocinios:
-    {
         $proyectos = new ProyectoModel();
         $db = db_connect();
         $session = session();
@@ -148,6 +133,22 @@ class ProyectosController extends BaseController
         $data = array('proyectos' => $proyectos);
 
 
+        return $this->layout('view_misPatrocinios', $data);
+    }*/
+
+    //Despues de la agrupacion
+    {
+        $usuarioPatrocinaProyectoModel = new UsuarioPatrocinaProyectoModel();
+        $db = db_connect();
+        $session = session();
+        $id_usuario = $session->get('id_usuario');
+
+
+
+        $inversiones = $usuarioPatrocinaProyectoModel->obtenerPatrociniosAgrupadosPorUsuario($id_usuario);
+        $data = array('proyectos' => $inversiones);
+
+        // dd($data);
         return $this->layout('view_misPatrocinios', $data);
     }
 
